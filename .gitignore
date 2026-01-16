@@ -1,0 +1,6 @@
+.venv/
+rivikiwi/db.sqlite3
+rivikiwi/migrations
+rivikiwi/__pycache__
+Scripts/
+
