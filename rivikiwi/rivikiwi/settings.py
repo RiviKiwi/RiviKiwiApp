@@ -37,12 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #django apps
+    'phonenumber_field',
     
     # our apps
     'products',
     
     'reviews'
+    'users'
 ]
+
+PHONENUMBER_DB_FORMAT = 'NATIONAL' # Формат для хранения в базе
+PHONENUMBER_DEFAULT_FORMAT = 'INTERNATIONAL' # Формат по умолчанию для вывода
+PHONENUMBER_DEFAULT_REGION = 'BY' # Ваш регион по умолчанию (например, RU, US, GB)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

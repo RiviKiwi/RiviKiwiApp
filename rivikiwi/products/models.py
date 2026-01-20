@@ -10,7 +10,7 @@ class ProductCategory(models.Model):
     class Meta:
         db_table = "product_category"
         verbose_name = "категорию"
-        verbose_name_plural = "категории"
+        verbose_name_plural = "Категории"
 
     def __str__(self):
         return self.name
@@ -31,7 +31,7 @@ class Product(models.Model):
     class Meta:
         db_table = "products"
         verbose_name = "продукт"
-        verbose_name_plural = "продукты"
+        verbose_name_plural = "Продукты"
 
     def __str__(self):
         return self.name
@@ -51,4 +51,4 @@ class ProductImage(models.Model):
     class Meta:
         db_table = "images"
         verbose_name = "изображение"
-        verbose_name_plural = "изображения"
+        verbose_name_plural = "Изображения товара"
