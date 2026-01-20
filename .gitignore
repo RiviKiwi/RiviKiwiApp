@@ -11,3 +11,6 @@ rivikiwi/products/__pycache__/
 rivikiwi/products/migrations/
 Scripts/
 
+rivikiwi/reviews/__pycache__/
+rivikiwi/reviews/migrations
+rivikiwi/media
