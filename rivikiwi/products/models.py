@@ -49,6 +49,6 @@ class ProductImage(models.Model):
     is_main = models.BooleanField(default=False, verbose_name="Главное изображение")
 
     class Meta:
-        db_table = "images"
-        verbose_name = "изображение"
+        db_table = "product_images"
+        verbose_name = "изображение товара"
         verbose_name_plural = "Изображения товара"

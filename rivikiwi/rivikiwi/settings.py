@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     
     # our apps
     'products',
-    
-    'reviews'
+    'reviews',
     'users'
 ]
 
@@ -130,4 +129,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-AUTH_USER_MODEL = 'user.User'
+MEDIA_URL = 'media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'users.User'

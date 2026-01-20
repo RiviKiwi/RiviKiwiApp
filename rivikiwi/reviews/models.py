@@ -17,3 +17,8 @@ class ReviewImage(models.Model):
         to=Review, on_delete=models.CASCADE, verbose_name="Отзыв"
     )
     image = models.ImageField(upload_to="reviews_images", verbose_name="Изображение")
+    
+    class Meta:
+        db_table = "review_images"
+        verbose_name = "изображение для отзыва"
+        verbose_name_plural = "Изображения для отзыва"
