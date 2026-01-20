@@ -1,1 +1,34 @@
-[{"model": "products.productcategory", "pk": 1, "fields": {"name": "Электротехника", "slug": "elektrotehnika"}}, {"model": "products.productcategory", "pk": 2, "fields": {"name": "Мебель", "slug": "mebel"}}, {"model": "products.productcategory", "pk": 3, "fields": {"name": "Спорттовары", "slug": "sporttovary"}}, {"model": "products.productcategory", "pk": 4, "fields": {"name": "Одежда", "slug": "odezhda"}}]
+[
+    {
+        "model": "products.productcategory",
+        "pk": 1,
+        "fields": {
+            "name": "Электротехника",
+            "slug": "elektrotehnika"
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 2,
+        "fields": {
+            "name": "Мебель",
+            "slug": "mebel"
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 3,
+        "fields": {
+            "name": "Спорттовары",
+            "slug": "sporttovary"
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 4,
+        "fields": {
+            "name": "Одежда",
+            "slug": "odezhda"
+        }
+    }
+]

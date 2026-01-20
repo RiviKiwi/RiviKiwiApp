@@ -1,0 +1,245 @@
+[
+    {
+        "model": "products.productimage",
+        "pk": 1,
+        "fields": {
+            "product": 9,
+            "image": "product_images/suit_1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 2,
+        "fields": {
+            "product": 9,
+            "image": "product_images/suit_2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 3,
+        "fields": {
+            "product": 9,
+            "image": "product_images/suit_3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 4,
+        "fields": {
+            "product": 8,
+            "image": "product_images/kurtka-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 5,
+        "fields": {
+            "product": 8,
+            "image": "product_images/kurtka-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 6,
+        "fields": {
+            "product": 8,
+            "image": "product_images/kurtka-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 7,
+        "fields": {
+            "product": 7,
+            "image": "product_images/coffemachine-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 8,
+        "fields": {
+            "product": 7,
+            "image": "product_images/coffemachine-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 9,
+        "fields": {
+            "product": 7,
+            "image": "product_images/coffemachine-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 10,
+        "fields": {
+            "product": 6,
+            "image": "product_images/microwave-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 11,
+        "fields": {
+            "product": 6,
+            "image": "product_images/microwave-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 12,
+        "fields": {
+            "product": 6,
+            "image": "product_images/microwave-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 13,
+        "fields": {
+            "product": 5,
+            "image": "product_images/phone-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 14,
+        "fields": {
+            "product": 5,
+            "image": "product_images/phone-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 15,
+        "fields": {
+            "product": 5,
+            "image": "product_images/phone-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 16,
+        "fields": {
+            "product": 4,
+            "image": "product_images/stol-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 17,
+        "fields": {
+            "product": 4,
+            "image": "product_images/stol-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 18,
+        "fields": {
+            "product": 4,
+            "image": "product_images/stol-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 19,
+        "fields": {
+            "product": 3,
+            "image": "product_images/sofa-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 20,
+        "fields": {
+            "product": 3,
+            "image": "product_images/sofa-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 21,
+        "fields": {
+            "product": 3,
+            "image": "product_images/sofa-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 22,
+        "fields": {
+            "product": 2,
+            "image": "product_images/gym-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 23,
+        "fields": {
+            "product": 2,
+            "image": "product_images/gym-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 24,
+        "fields": {
+            "product": 2,
+            "image": "product_images/gym-3.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 25,
+        "fields": {
+            "product": 1,
+            "image": "product_images/run-1.jpg",
+            "is_main": true
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 26,
+        "fields": {
+            "product": 1,
+            "image": "product_images/run-2.jpg",
+            "is_main": false
+        }
+    },
+    {
+        "model": "products.productimage",
+        "pk": 27,
+        "fields": {
+            "product": 1,
+            "image": "product_images/run-3.jpg",
+            "is_main": false
+        }
+    }
+]
