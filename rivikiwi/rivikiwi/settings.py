@@ -37,10 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #django apps
+    'phonenumber_field',
     
     # our apps
     'products',
+    'users'
 ]
+
+PHONENUMBER_DB_FORMAT = 'NATIONAL' # Формат для хранения в базе
+PHONENUMBER_DEFAULT_FORMAT = 'INTERNATIONAL' # Формат по умолчанию для вывода
+PHONENUMBER_DEFAULT_REGION = 'BY' # Ваш регион по умолчанию (например, RU, US, GB)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,3 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+AUTH_USER_MODEL = 'users.User'

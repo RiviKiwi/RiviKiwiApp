@@ -4,5 +4,7 @@ rivikiwi/migrations
 rivikiwi/rivikiwi/__pycache__/
 rivikiwi/products/__pycache__
 rivikiwi/products/migrations
+rivikiwi/users/migrations
+
 Scripts/
 
