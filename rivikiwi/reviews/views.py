@@ -27,9 +27,7 @@ def create_review(request, product_id):
     if request.method == "POST":
         form = ReviewForm(data=request.POST)
         images = request.FILES.getlist("images")
-        # if len(images) > 6:
-        #     images = images[::6]
-            
+
         if form.is_valid():
             review = form.save(commit=False)
             review.product_id = product_id
