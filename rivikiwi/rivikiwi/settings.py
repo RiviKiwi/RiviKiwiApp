@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     
     # our apps
     'products',
-    'users'
+    'users',
+    'main'
 ]
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL' # Формат для хранения в базе

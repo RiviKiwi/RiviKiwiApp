@@ -1,10 +1,13 @@
 .venv/
+.idea/
 rivikiwi/db.sqlite3
-rivikiwi/migrations/
+rivikiwi/rivikiwi/migrations/
 rivikiwi/rivikiwi/__pycache__/
+rivikiwi/users/__pycache__/
+rivikiwi/users/migrations/
+rivikiwi/main/__pycache__/
+rivikiwi/main/migrations/
 rivikiwi/products/__pycache__/
 rivikiwi/products/migrations/
-rivikiwi/users/migrations/
-rivikiwi/users/__pycache__/
 Scripts/
 
