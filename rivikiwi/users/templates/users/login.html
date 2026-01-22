@@ -1,18 +1,48 @@
+{% load static %}
+{% load account %}
+{% load socialaccount %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Вход</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <form action="{% url 'users:login' %}" method="post">
-        {%csrf_token%}
-        {{ form.as_p }}
-        <button type="submit">Войти</button>
-        <a href="{% url 'users:registration'%}">Зарегистрироваться</a>
-    </form>
+    <div class="login-wrapper">
+    <div class="login-card">
 
+      <h2 class="title"><strong>Вход</strong></h2>
 
-</body
+      <div class="avatar">
+        <img src="{% static 'assets/bird.png' %}" alt="Птица">
+      </div>
+      <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Никнейм / Номер телефона / Электронная почта" name = "username" id = "id_username">
+
+        <div class="password-field">
+          <input type="password" placeholder="Пароль" name = "password" id = "id_password">
+          <span class="eye">
+              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+          </span>
+        </div>
+
+        <button type="submit" class="login-btn">Войти</button>
+      </form>
+
+      <p class="no-account">Нет профиля? <a href="{% url 'users:registration'%}" class="link">Создайте его!</a></p>
+
+      <div class="socials">
+        <a href="{% provider_login_url 'google'%}"><img src="{% static 'assets/google.png' %}" alt="Google"></a>
+        <img src="{% static 'assets/apple.png' %}" alt="Apple">
+        <img src="{% static 'assets/vk.png' %}" alt="VK">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
 </html>

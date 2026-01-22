@@ -1,3 +1,5 @@
+{%load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +13,7 @@
     <a href="{% url 'users:login' %}">Войти</a>
     {% else %}
     <a href="{% url 'users:logout' %}">Выйти</a>
+    <h3>{{user.username}}</h3>
     {% endif %}
 </body>
 </html>

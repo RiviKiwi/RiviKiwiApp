@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: url("../assets/background.png") center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Карточка логина */
+.login-card {
+  width: 340px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.registration-card {
+  width: 340px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок */
+.title {
+  color: #7ac943;
+  margin-bottom: 12px;
+}
+
+/* Аватар */
+.avatar img {
+  width: 80px;
+  margin-bottom: 16px;
+}
+
+/* Поля ввода */
+input {
+  width: 100%;
+  padding: 10px 44px 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #7ac943;
+}
+
+/* Поле пароля */
+.password-field {
+  position: relative;
+}
+
+/* Глазик */
+.password-field .eye {
+  position: absolute;
+  right: 14px;
+  top: 42%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password-field .eye img {
+  width: 24px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.password-field .eye img:hover {
+  opacity: 1;
+}
+
+/* Кнопка */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #7ac943;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #6bb73b;
+}
+
+.registration-btn {
+  width: 80%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #7ac943;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.registration-btn:hover {
+  background: #6bb73b;
+}
+
+/* Текст */
+.no-account {
+  margin: 12px 0;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Социальные кнопки */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.socials img {
+  width: 32px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+.socials img:hover {
+  opacity: 1;
+}
+
+.link {
+    color:#6bb73b;
+}

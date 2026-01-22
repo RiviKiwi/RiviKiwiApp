@@ -1,15 +1,49 @@
+
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
 </head>
 <body>
-    <form action="{% url 'users:registration' %}" method="post">
-        {%csrf_token%}
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-</body
+    <div class="registration-wrapper">
+    <div class="registration-card">
+        <h2 class="title"><strong>Регистрация</strong></h2>
+        <form action="{% url 'users:registration' %}" method="post">
+          {% csrf_token %}
+          <input type="text" placeholder="Никнейм" name="username" id="id_username">
+          <input type="text" placeholder="Фамилия" name="last_name" id="id_last_name">
+          <input type="text" placeholder="Имя" name="first_name" id="id_first_name">
+          <input type="text" placeholder="Отчество" name="middle_name" id="id_middle_name">
+          <input type="text" placeholder="Номер телефона" name="phone" id="id_phone">
+          <input type="text" placeholder="Электронная почта (обязательно)" name="email" id="id_email">
+
+          <div class="password-field">
+          <input type="password" placeholder="Пароль" name="password1" id="id_password1">
+          <span class="eye">
+              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+          </span>
+        </div>
+
+        <div class="password-field">
+          <input type="password" placeholder="Подтвердите пароль" name="password2" id="id_password12">
+          <span class="eye">
+              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+          </span>
+        </div>
+
+        <button type="submit" class="registration-btn">Зарегестрироваться</button>
+      </form>
+
+      <p class="no-account">Есть профиль? <a href="{% url 'users:login' %}" class="link">Войти</a></p>
+
+
+    </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
 </html>

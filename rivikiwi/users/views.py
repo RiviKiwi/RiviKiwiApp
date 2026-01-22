@@ -4,6 +4,7 @@ from django.urls import reverse
 from .forms import UserAuthenticationForm, UserRegistrationForm
 from django.contrib import auth
 
+
 def login(request):
     if request.method == "POST":
         form = UserAuthenticationForm(data = request.POST)
@@ -13,6 +14,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                print('hellow')
                 return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserAuthenticationForm()
@@ -23,12 +25,13 @@ def login(request):
 
 
 def registration(request):
+    BACKEND = 'django.contrib.auth.backends.ModelBackend'
     if request.method == "POST":
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
             user = form.instance
-            auth.login(request, user)
+            auth.login(request, user, backend=BACKEND)
             return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserRegistrationForm()            
