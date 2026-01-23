@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # Optional -- requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.yandex',
 
     #django apps
     'phonenumber_field',
@@ -90,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -179,12 +181,15 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
         'APP': {
             'client_id': env('OAUTH_GOOGLE_CLIENT_ID'),
             'secret': env('OAUTH_GOOGLE_SECRET'),
+        }
+    },
+    'yandex': {
+        'APP': {
+            'client_id': env('OAUTH_YANDEX_CLIENT_ID'),
+            'secret': env('OAUTH_YANDEX_SECRET'),
         }
     }
 }
