@@ -1,21 +1,23 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  --green: #90C825; 
+  --border-color: #F0EBE5;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
   margin: 0;
   height: 100vh;
-  background: url("../assets/background.png") center / cover no-repeat;
+  background: url("../images/log-background.svg") center / cover no-repeat;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
 /* Карточка логина */
 .login-card {
-  width: 340px;
-  background: #ffffff;
+  width: 360px;
+  background: white;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
@@ -23,8 +25,8 @@ body {
 }
 
 .registration-card {
-  width: 340px;
-  background: #ffffff;
+  width: 360px;
+  background: white;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
@@ -33,13 +35,13 @@ body {
 
 /* Заголовок */
 .title {
-  color: #7ac943;
+  color: var(--green);
   margin-bottom: 12px;
 }
 
 /* Аватар */
 .avatar img {
-  width: 80px;
+  width: 120px;
   margin-bottom: 16px;
 }
 
@@ -49,13 +51,13 @@ input {
   padding: 10px 44px 10px 14px;
   margin-bottom: 12px;
   border-radius: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   outline: none;
   font-size: 14px;
 }
 
 input:focus {
-  border-color: #7ac943;
+  border-color: var(--green);
 }
 
 /* Поле пароля */
@@ -86,7 +88,7 @@ input:focus {
 .login-btn {
   width: 100%;
   padding: 12px;
-  background: #7ac943;
+  background: var(--green);
   border: none;
   border-radius: 25px;
   color: white;
@@ -95,14 +97,15 @@ input:focus {
 }
 
 .login-btn:hover {
-  background: #6bb73b;
+  background: var(--green);
+  opacity: 0.8;
 }
 
 .registration-btn {
   width: 80%;
   padding: 12px;
   margin-top: 20px;
-  background: #7ac943;
+  background: var(--green);
   border: none;
   border-radius: 25px;
   color: white;
@@ -111,7 +114,8 @@ input:focus {
 }
 
 .registration-btn:hover {
-  background: #6bb73b;
+  background: var(--green);
+  opacity: 0.8;
 }
 
 /* Текст */
@@ -142,5 +146,5 @@ input:focus {
 }
 
 .link {
-    color:#6bb73b;
+    color:var(--green);
 }

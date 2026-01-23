@@ -10,8 +10,8 @@ passwordFields.forEach(field => {
       
       passwordInput.type = isHidden ? 'text' : 'password';
       eyeIcon.src = isHidden
-        ? 'assets/opened_eye.png'
-        : 'assets/closed_eye.png';
+        ? '/static/images/icons/opened-eye.svg'
+        : '/static/images/icons/closed-eye.svg';
     });
   }
 });
