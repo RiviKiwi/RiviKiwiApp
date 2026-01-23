@@ -5,8 +5,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="{% static 'images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
   <title>Регистрация</title>
-  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/style-authorization.css' %}">
 </head>
 <body>
     <div class="registration-wrapper">
@@ -24,14 +25,14 @@
           <div class="password-field">
           <input type="password" placeholder="Пароль" name="password1" id="id_password1">
           <span class="eye">
-              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+              <img src="{% static 'images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
         </div>
 
         <div class="password-field">
           <input type="password" placeholder="Подтвердите пароль" name="password2" id="id_password12">
           <span class="eye">
-              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+              <img src="{% static 'images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
         </div>
 
@@ -44,6 +45,6 @@
     </div>
     </div>
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main-authorization.js' %}"></script>
 </body>
 </html>

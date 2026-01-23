@@ -6,8 +6,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="{% static 'images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
   <title>Вход</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style-authorization.css' %}">
 </head>
 <body>
     <div class="login-wrapper">
@@ -16,7 +17,7 @@
       <h2 class="title"><strong>Вход</strong></h2>
 
       <div class="avatar">
-        <img src="{% static 'assets/bird.png' %}" alt="Птица">
+        <img src="{% static 'images/icons/bird-log.png' %}" alt="Птица">
       </div>
       <form action="{% url 'users:login' %}" method="post">
         {% csrf_token %}
@@ -25,7 +26,7 @@
         <div class="password-field">
           <input type="password" placeholder="Пароль" name = "password" id = "id_password">
           <span class="eye">
-              <img src="{% static 'assets/closed_eye.png' %}" alt="Показать пароль">
+              <img src="{% static 'images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
         </div>
 
@@ -35,14 +36,13 @@
       <p class="no-account">Нет профиля? <a href="{% url 'users:registration'%}" class="link">Создайте его!</a></p>
 
       <div class="socials">
-        <a href="{% provider_login_url 'google'%}"><img src="{% static 'assets/google.png' %}" alt="Google"></a>
-        <a href="{% provider_login_url 'yandex' %}"><img src="{% static 'assets/yandex.png' %}" alt="Yandex"></a>
-        <a href="{% provider_login_url 'yandex' %}"><img src="{% static 'assets/vk.png' %}" alt="VK"></a>
+        <a href="{% provider_login_url 'google'%}"><img src="{% static 'images/icons/google-icon.svg' %}" alt="Google"></a>
+        <a href="{% provider_login_url 'yandex' %}"><img src="{% static 'images/icons/yandex.svg' %}" alt="Yandex"></a>
       </div>
 
     </div>
   </div>
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/main-authorization.js' %}"></script>
 </body>
 </html>
