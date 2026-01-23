@@ -1,0 +1,429 @@
+:root {
+  --bg-color: #FFFCF2;       /* Кремовый фон */
+  --green: #90C825;          /* Лаймовый зеленый киви */
+  --dark: #2D2C28;     /* Темный цвет для текста и футера */
+  --text-brown: #574231;      /* Коричневый цвет */
+  --border-color: #F0EBE5;  /* Цвет границ */
+  --transparent-brown: #44342395; /* Коричневый прозрачный цвет */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 910px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.green-text { color: var(--green); }
+
+input::placeholder {
+  color: var(--transparent-brown);
+  opacity: 1;
+}
+
+.site-header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  gap:20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--dark);
+}
+.search-bar {
+  flex-grow: 1;
+  max-width: 600px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 5px 5px 5px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 15px;
+  margin: 0 10px;
+}
+
+.location-wrapper {
+  position: relative;
+}
+
+.city-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;       
+  right: 0;        
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  min-width: 150px;
+  z-index: 1000;   
+  padding: 5px 0;
+  margin-top: 10px; 
+}
+
+.city-dropdown.show {
+  display: block;
+}
+
+.city-option {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-brown);
+}
+
+.city-option:hover {
+  background-color: var(--bg-color);
+  color: var(--green); 
+}
+
+.location {
+  font-size: 14px;
+  color: var(--transparent-brown);
+  stroke: var(--transparent-brown);
+  display: flex;
+  max-width: 200px; 
+  align-items: center;
+  padding-right: 15px;
+  margin-right: 10px;
+  border-right: 1px solid var(--border-color);
+  white-space: nowrap;
+  gap: 5px;
+}
+.location-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block; 
+}
+.btn-search {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 8px 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+}
+.add-icon-wrapper{
+  display: flex;
+}
+.btn {
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--text-brown);
+  color: var(--text-brown);
+  fill: var(--text-brown);
+}
+
+.btn-outline:hover {
+  background: var(--text-brown);
+  border: 2px solid var(--text-brown);
+  color: white;
+  fill: white;
+}
+.btn-primary {
+  background: var(--green);
+  border: none;
+  stroke:white;
+  color: white;
+}
+.btn-primary:hover { opacity: 0.8; }
+
+.header-bottom {
+  border-top: 1px solid var(--border-color);
+  background-color: white;
+  padding: 10px 0;
+  overflow-x: auto;
+}
+
+.categories-container {
+  display: flex;
+  gap: 10px;
+}
+
+.cat-link {
+  text-decoration: none;
+  color: var(--text-brown);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.cat-link.active {
+  background-color: var(--dark);
+  border-color: var(--dark);
+  color: white;
+}
+.cat-link:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+/* --- HERO SECTION (Баннер) --- */
+.hero-section {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, #4b3f35 0%, #2f2a25 100%);
+  border-radius: 12px;
+  padding: 60px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-content h1 {
+  font-size: 36px;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  color: var(--bg-color);
+  margin-bottom: 25px;
+}
+
+.btn-large {
+  padding: 12px 30px;
+  font-size: 16px;
+}
+
+/* --- MAIN LAYOUT (Сетка) --- */
+.main-layout {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* Сайдбар слева */
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0px 20px;
+}
+
+.sidebar h3 {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color); 
+  border-radius: 8px;     
+  background: white;
+  overflow: hidden;       
+}
+
+.price-inputs input {
+  border: none;           
+  outline: none;          
+  padding: 10px 15px;
+  width: 50%;             
+  font-size: 14px;
+}
+
+.price-inputs input:first-child {
+  border-right: 1px solid var(--border-color);
+}
+
+/* Контент справа */
+.content-area {
+  flex-grow: 1;
+}
+
+.content-area h2 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.catalog-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  margin-bottom: 20px;            
+  position: relative;             
+}
+
+.catalog-header h2 {
+  margin: 0; 
+}
+
+/* Кнопка сортировки */
+.sort-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.sort-button:hover {
+  color: var(--green);
+}
+.sort-button:hover svg {
+  stroke: var(--green);
+}
+
+.sort-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 5px 0;
+  z-index: 100;
+  min-width: 180px;
+}
+
+.sort-dropdown.show { display: block; }
+
+.sort-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.sort-option:hover { background-color: var(--bg-color); color: var(--green); }
+
+/* Сетка товаров */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 3/4.5;
+}
+
+.image-placeholder {
+  height: 200px;
+  width: 100%;
+}
+
+.gradient-green {
+  background: linear-gradient(180deg, #90C825 0%, #C6E48A 100%);
+}
+
+.card-info {
+  padding: 15px;
+  border-top: 1px solid var(--border-color);
+  height: 60px; 
+}
+
+/* --- FOOTER --- */
+.site-footer {
+  margin-top: auto;
+  background-color: var(--dark);
+  color: #bbb;
+  padding: 60px 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-col {
+  flex: 1;
+}
+
+.footer-logo {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+.footer-col h3 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.footer-col a {
+  display: block;
+  color: #bbb;
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.footer-col a:hover { color: white; }

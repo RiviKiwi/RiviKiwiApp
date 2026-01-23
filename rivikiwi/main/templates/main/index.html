@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
     <title>RiviKiwi - Продавайте и покупайте</title>
-    <link rel="stylesheet" href="assets/css/main-page-style.css">
-    <script src="assets/js/main-page-scripts.js" defer></script>
+    <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
+    <script src="{% static 'assets/js/main-page-scripts.js' %}" defer></script>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
                 </a>
                 <!-- Поиск -->
                 <div class="search-bar">
-                    <img src="assets/images/icons/search-icon.svg">
+                    <img src="{% static 'assets/images/icons/search-icon.svg' %}">
                     <input type="text" placeholder="Что вы ищете?">
                     <div class="location-wrapper">
                         <div class="location" onclick="toggleCityMenu()" style="cursor: pointer;">
@@ -58,7 +58,7 @@
                         </svg></span>
                         <span>Добавить объявление</span>
                     </button>
-                    <a href="login.html" class="btn btn-primary">
+                    <a href="{% url 'users:login' %}" class="btn btn-primary">
                         <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 17C14 13.5636 11.0899 10.7778 7.5 10.7778C3.91015 10.7778 1 13.5636 1 17M7.5 8.11111C5.44866 8.11111 3.78571 6.51924 3.78571 4.55556C3.78571 2.59188 5.44866 1 7.5 1C9.55131 1 11.2143 2.59188 11.2143 4.55556C11.2143 6.51924 9.55131 8.11111 7.5 8.11111Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
