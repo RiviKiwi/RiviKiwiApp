@@ -218,7 +218,6 @@ input::placeholder {
 /* --- HERO SECTION (Баннер) --- */
 .hero-section {
   margin-top: 20px;
-  margin-bottom: 40px;
   background: linear-gradient(90deg, #4b3f35 0%, #2f2a25 100%);
   border-radius: 12px;
   padding: 60px;
@@ -239,14 +238,77 @@ input::placeholder {
 
 .btn-large {
   padding: 12px 30px;
+  display: inline-block;
   font-size: 16px;
 }
+/* Account */
+.account-wrapper {
+  cursor:pointer;
+  position: relative;
+  border-radius: 100px;
+  display: flex;           
+  justify-content: center; 
+  align-items: center; 
+  width: 45px;
+  aspect-ratio: 1;
+  stroke: white;
+  background-color: var(--green);
+}
+.account-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;       
+  right: 0;        
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  min-width: 150px;
+  z-index: 1000;   
+  margin-top: 10px; 
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  justify-content: center;
+}
 
+.account-dropdown.show {
+  display: flex;
+}
+
+.account-dropdown h3 {
+  color: var(--green);
+  border-bottom: 1px solid var(--border-color);
+  padding: 5px 20px;
+}
+.account-option {
+  padding: 10px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-brown);
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.account-option:hover {
+  background-color: var(--bg-color);
+  color: var(--green); 
+}
+.acc-menu-options {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+  border: 100%;
+}
 /* --- MAIN LAYOUT (Сетка) --- */
 .main-layout {
   display: flex;
   gap: 40px;
   margin-bottom: 60px;
+  margin-top: 40px;
 }
 
 /* Сайдбар слева */

@@ -57,3 +57,16 @@ window.onclick = function(event) {
         }
     }
 }
+/* Меню профиля в углу */
+function showAccountMenu() {
+    const dropdown = document.getElementById('accountDropdown');
+    dropdown.classList.toggle('show');
+}
+window.onclick = function(event) {
+    if (!event.target.closest('.account-wrapper')) {
+      const dropdown = document.getElementById('accountDropdown');
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+      }
+    }
+}
