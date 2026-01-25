@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 
 class ProductCategory(models.Model):
     name = models.CharField(
@@ -27,6 +27,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="Описание")
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Цена")
     discount = models.PositiveIntegerField(blank=True, null=True, verbose_name="Скидка")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
 
     class Meta:
         db_table = "products"
@@ -41,10 +42,16 @@ class Product(models.Model):
             return self.price * self.discount
         
         return self.price
+    
+    def get_first_picture(self):
+        res_image = self.images.all().first()
+        if res_image:
+            return res_image.image
+        return None
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(to=Product,on_delete=models.CASCADE, verbose_name="Продукт")
+    product = models.ForeignKey(to=Product,on_delete=models.CASCADE, related_name="images", verbose_name="Продукт")
     image = models.ImageField(upload_to="product_images", verbose_name="Изображение")
     is_main = models.BooleanField(default=False, verbose_name="Главное изображение")
 
