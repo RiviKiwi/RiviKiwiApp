@@ -148,38 +148,23 @@
                     </div>
                 </div>
                 <div class="products-grid">
-                    <!-- Карточка 1 -->
+                    {% for product in  products %}
                     <div class="product-card">
-                        <div class="image-placeholder gradient-green"></div>
+                        <div class="image-placeholder">
+                            {% if product.get_first_picture %}
+                                <img src="{{ product.get_first_picture.url }}" width="200px"; height="200px">
+                            {% endif %}
+                        </div>
                         <div class="card-info">
                             <div class="text-line medium"></div>
-                            <div class="text-line short"></div>
+                                <p>{{product.name}}</p>
+                                <p>{{product.price}}</p>
+                            <div class="text-line short">
+                                <p>{{product.description|truncatechars:40}}</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- Карточка 2 -->
-                    <div class="product-card">
-                        <div class="image-placeholder gradient-green"></div>
-                        <div class="card-info">
-                            <div class="text-line medium"></div>
-                            <div class="text-line short"></div>
-                        </div>
-                    </div>
-                    <!-- Карточка 3 -->
-                    <div class="product-card">
-                        <div class="image-placeholder gradient-green"></div>
-                        <div class="card-info">
-                            <div class="text-line medium"></div>
-                            <div class="text-line short"></div>
-                        </div>
-                    </div>
-                    <!-- Карточка 4 -->
-                    <div class="product-card">
-                        <div class="image-placeholder gradient-green"></div>
-                        <div class="card-info">
-                            <div class="text-line medium"></div>
-                            <div class="text-line short"></div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
