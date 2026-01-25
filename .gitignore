@@ -9,6 +9,7 @@ rivikiwi/main/__pycache__/
 rivikiwi/main/migrations/
 rivikiwi/products/__pycache__/
 rivikiwi/products/migrations/
+rivikiwi/products/templatetags/__pycache__
 Scripts/
 
 rivikiwi/reviews/__pycache__/
