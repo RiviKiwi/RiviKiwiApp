@@ -19,19 +19,19 @@ window.onclick = function(event) {
 }
 
 /* Категории товаров */
-document.addEventListener('DOMContentLoaded', () => {
-  const navContainer = document.querySelector('.categories-container');
-  navContainer.addEventListener('click', (event) => {
-    const clickedLink = event.target.closest('.cat-link');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const navContainer = document.querySelector('.categories-container');
+//   navContainer.addEventListener('click', (event) => {
+//     const clickedLink = event.target.closest('.cat-link');
     
-    if (clickedLink) {
-      event.preventDefault();
-      document.querySelectorAll('.cat-link').forEach(link => link.classList.remove('active'));
-      clickedLink.classList.add('active');
-    }
-  });
+//     if (clickedLink) {
+//       event.preventDefault();
+//       document.querySelectorAll('.cat-link').forEach(link => link.classList.remove('active'));
+//       clickedLink.classList.add('active');
+//     }
+//   });
   
-});
+// });
 /* Сортировка товаров */
 function toggleSortMenu() {
     document.getElementById('sortDropdown').classList.toggle('show');
