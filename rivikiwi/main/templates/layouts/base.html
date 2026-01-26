@@ -43,10 +43,23 @@
                             </span>
                         </div>
                         <div class="city-dropdown" id="cityDropdown">
-                            {% all_cities as cities %}
-                            {% for city in cities %}
-                                <div class="city-option" onclick="selectCity('{{ city.name }}')">{{ city.name }}</div>
-                            {% endfor %}
+                            <form action="
+                            {% if request.GET.q %}
+                            {% url 'catalog:search' %}
+                            {% elif category %}
+                            {% url 'catalog:index' category.slug %}
+                            {% else %}
+                            {% url 'main:index' %}
+                            {% endif %}" method="get" id="city-form">
+                                <input type="hidden" name="city" id="city_input">
+                                
+                                {% all_cities as cities %}
+                                {% for city in cities %}
+                                    <div class="city-option" onclick="selectCityWithSubmit('{{ city }}')">
+                                        {{ city }}
+                                    </div>
+                                {% endfor %}
+                            </form>
                         </div>
                     </div>
                     <button class="btn-search btn-primary">Найти</button>
@@ -94,7 +107,7 @@
             <div class="container categories-container">
                 {% all_categories as categories %}
                 {% for category in categories %}
-                    <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if categoyr.slug == 'all'%}active{% endif %}">{{ category.name }}</a>
+                    <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if category.slug == 'all'%}active{% endif %}">{{ category.name }}</a>
                 {% endfor %}
                 <!-- <a href="#" class="cat-link active">Все</a>
                 <a href="#" class="cat-link">Электроника</a>

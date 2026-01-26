@@ -410,6 +410,8 @@ input::placeholder {
 .sort-dropdown.show { display: block; }
 
 .sort-option {
+  display: block; /* Главное изменение */
+  margin-bottom: 8px; /* Отступ между элементами */
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;

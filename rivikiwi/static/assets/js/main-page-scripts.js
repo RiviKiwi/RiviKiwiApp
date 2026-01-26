@@ -70,3 +70,13 @@ window.onclick = function(event) {
 }
 }
 
+function submitSortForm(value) {
+    document.getElementById('order_by_input').value = value;
+    document.getElementById('sort-form').submit();
+}
+
+function selectCityWithSubmit(cityName) {
+    selectCity(cityName);
+    document.getElementById('city_input').value = cityName;
+    document.getElementById('city-form').submit();
+}

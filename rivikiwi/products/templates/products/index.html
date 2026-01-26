@@ -30,11 +30,20 @@
                         </svg>
                         <span id="currentSort">Сначала новые</span>
                     </button>
-                    <div class="sort-dropdown" id="sortDropdown">
-                        <div class="sort-option" onclick="selectSort('Сначала новые')">Сначала новые</div>
-                        <div class="sort-option" onclick="selectSort('Сначала дешевые')">Сначала дешевые</div>
-                        <div class="sort-option"onclick="selectSort('Сначала дорогие')">Сначала дорогие</div>
-                    </div>
+                        <div class="sort-dropdown" id="sortDropdown">
+                            <form action="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:index' category.slug %}{% endif %}" method="get" id="sort-form">
+                                <input type="hidden" name='order_by' id='order_by_input'>
+                                <div class="sort-option" onclick="submitSortForm('date')">
+                                    Сначала новые
+                                </div>
+                                <div class="sort-option" onclick="submitSortForm('price')">
+                                    Сначала дешевые
+                                </div>
+                                <div class="sort-option" onclick="submitSortForm('-price')">
+                                    Сначала дорогие
+                                </div>
+                            </form>
+                        </div>
                 </div>
                 {% include 'layouts/card.html'%}
             </div>
