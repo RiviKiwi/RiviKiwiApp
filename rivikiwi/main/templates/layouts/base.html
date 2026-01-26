@@ -43,12 +43,10 @@
                             </span>
                         </div>
                         <div class="city-dropdown" id="cityDropdown">
-                            <div class="city-option" onclick="selectCity('Минск')">Минск</div>
-                            <div class="city-option" onclick="selectCity('Брест')">Брест</div>
-                            <div class="city-option" onclick="selectCity('Гомель')">Гомель</div>
-                            <div class="city-option" onclick="selectCity('Гродно')">Гродно</div>
-                            <div class="city-option" onclick="selectCity('Витебск')">Витебск</div>
-                            <div class="city-option" onclick="selectCity('Могилев')">Могилев</div>
+                            {% all_cities as cities %}
+                            {% for city in cities %}
+                                <div class="city-option" onclick="selectCity('{{ city.name }}')">{{ city.name }}</div>
+                            {% endfor %}
                         </div>
                     </div>
                     <button class="btn-search btn-primary">Найти</button>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductCategory, Product, ProductImage
+from .models import ProductCategory, Product, ProductImage, City
 
 
 @admin.register(ProductCategory)
@@ -18,3 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductImageAdmin(admin.ModelAdmin):
     list_display=['id', 'image', 'is_main']
     search_fields=['id']
+    
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    list_display=['id', 'name']
+    search_fields=['id', 'name']
