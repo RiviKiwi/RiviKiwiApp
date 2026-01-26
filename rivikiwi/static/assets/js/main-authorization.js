@@ -10,7 +10,7 @@ passwordFields.forEach(field => {
     const closedEyePath = eyeIcon.src;
     const openedEyePath = closedEyePath.replace('closed-eye.svg', 'opened-eye.svg');
     const birdLogPath = avatarIcon.src;
-    const birdOpenPath = birdLogPath.replace('bird-log.png', 'bird-open-svg.svg');
+    const birdOpenPath = birdLogPath.replace('bird-log.svg', 'bird-open-svg.svg');
 
     eyeIcon.addEventListener('click', () => {
       const isHidden = passwordInput.type === 'password';
