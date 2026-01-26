@@ -9,12 +9,41 @@
         <div class="main-layout">
             
             <!-- Левая колонка (Фильтры) -->
-            <aside class="sidebar">
-                <h3>Цена</h3>
-                <div class="price-inputs">
-                    <input type="number" placeholder="От">
-                    <input type="number" placeholder="До">
+             <aside class="sidebar">
+                <form action="
+                    {% if request.GET.q %}
+                    {% url 'catalog:search' %}
+                    {% elif category %}
+                    {% url 'catalog:index' category.slug %}
+                    {% else %}
+                    {% url 'main:index' %}
+                    {% endif %}" method="get" id="city-form">
+                <div class="filter price-filter">
+                    <h3>Цена</h3>
+                    
+                    <div class="input-block price-inputs">
+                        <input type="number" min="0" id="start-price" placeholder="От" oninput="this.value = Math.abs(this.value)"
+                    onkeydown="return event.key !== '-'" name="min_price" value="{% if request.GET.min_price %}{{ request.GET.min_price }}{% endif %}">
+                        <input type="number" min="0" id="end-price" placeholder="До" oninput="this.value = Math.abs(this.value)" 
+                    onkeydown="return event.key !== '-'" name="max_price" value="{% if request.GET.max_price %}{{ request.GET.max_price }}{% endif %}">
+                    </div>
                 </div>
+                <div class="filter">
+                    <h3>Рейтинг</h3>
+                    <div class="input-block rating-input">
+                        <input type="number" min="0" max="5" step="0.1" id="price-from" placeholder="Минимальный рейтинг: 0" onkeydown="return event.key !== '-'" 
+                        name="rating" value="{% if request.GET.rating %}{{request.GET.rating}}{% endif %}">
+                    </div>
+                </div>
+                <div class="filter">
+                    <div class="has-discount">
+                    <h3>Есть скидка</h3><input type="checkbox" name="has_discount" value="on" {% if request.GET.has_discount %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="accept">
+                    <button class="btn btn-primary" type="submit">Применить</button>
+                </div>
+            </form>
             </aside>
 
             <!-- Правая колонка (Товары) -->

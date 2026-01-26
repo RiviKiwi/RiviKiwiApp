@@ -179,6 +179,14 @@ input::placeholder {
 }
 .btn-primary:hover { opacity: 0.8; }
 
+.accept {
+  display: flex;
+  justify-content: center;
+}
+.accept button {
+  width: 100%;
+  justify-content: center;
+}
 .header-bottom {
   border-top: 1px solid var(--border-color);
   background-color: white;
@@ -329,16 +337,21 @@ input::placeholder {
   margin-top: 0;
   margin-bottom: 7px;
 }
-
-.price-inputs {
+.input-block {
   display: flex;
   align-items: center;
   border: 1px solid var(--border-color); 
   border-radius: 8px;     
   background: white;
-  overflow: hidden;       
+  overflow: hidden;     
 }
-
+.input-block input{
+  border: none;           
+  outline: none;          
+  padding: 10px 15px;
+  width: 100%;             
+  font-size: 14px;    
+}
 .price-inputs input {
   border: none;           
   outline: none;          
@@ -350,7 +363,12 @@ input::placeholder {
 .price-inputs input:first-child {
   border-right: 1px solid var(--border-color);
 }
-
+.has-discount input[type="checkbox"]{
+  width: 15px;
+  height:15px;
+  cursor:pointer;
+  accent-color:var(--green);
+}
 /* Контент справа */
 .content-area {
   flex-grow: 1;
@@ -410,8 +428,6 @@ input::placeholder {
 .sort-dropdown.show { display: block; }
 
 .sort-option {
-  display: block; /* Главное изменение */
-  margin-bottom: 8px; /* Отступ между элементами */
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
@@ -530,3 +546,204 @@ input::placeholder {
   font-size: 14px;
 }
 .footer-col a:hover { color: white; }
+
+/* ===== PROFILE PAGE ===== */
+.profile-page {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.profile-layout {
+  display: flex;
+  gap: 30px;
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+  width: 300px;
+  flex-shrink: 0;
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px 25px;
+  text-align: center;
+  height: fit-content;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 20px;
+}
+
+.profile-nickname {
+  font-size: 14px;
+  color: var(--transparent-brown);
+  margin-bottom: 10px;
+}
+
+.profile-rating {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.profile-rating span {
+  color: var(--transparent-brown);
+}
+
+.profile-info {
+  border-top: 1px solid var(--border-color);
+  margin-top: 15px;
+  padding-top: 15px;
+  text-align: left;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.info-row span {
+  color: var(--transparent-brown);
+}
+
+/* ===== PROFILE CONTENT ===== */
+.profile-content {
+  flex-grow: 1;
+}
+
+/* ===== PRODUCT IMAGE ===== */
+.product-image {
+  width: 100%;
+  height: 160px;
+  background: #f5f3ee;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ===== REVIEWS PAGE ===== */
+.reviews-page {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  max-width: 800px;
+}
+
+/* TABS */
+.reviews-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tab.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+/* WRITE REVIEW */
+.write-review-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 30px;
+}
+
+.write-review-card textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  resize: none;
+  font-family: inherit;
+}
+
+.rating-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stars {
+  font-size: 22px;
+  color: var(--green);
+  cursor: pointer;
+}
+
+/* REVIEW CARD */
+.review-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.review-card.my-review {
+  border-color: var(--green);
+}
+
+.review-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.review-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-name {
+  font-weight: 600;
+}
+
+.review-meta {
+  font-size: 13px;
+  color: #777;
+}
+
+.review-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+/*For Links in reviews*/
+.review-link {
+  color:#777;
+}

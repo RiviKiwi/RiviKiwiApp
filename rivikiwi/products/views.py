@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import Product, ProductCategory
 
 def index(request, category_slug):
+    max_price = request.GET.get("max_price", None)
+    min_price = request.GET.get("min_price", None)
+    rating = request.GET.get("rating", None)
+    has_discount = request.GET.get("has_discount", None)
     order_by = request.GET.get("order_by", None)
     city = request.GET.get("city", None)
     
@@ -13,6 +17,18 @@ def index(request, category_slug):
         
     if city:
         products = products.filter(city__name=city)
+        
+    if min_price and min_price != '0':
+        products = products.filter(price__gte=int(min_price))
+        
+    if max_price and max_price != '0':
+        products = products.filter(price__lte=int(max_price))
+        
+    if rating:
+        products = products.filter(rating__gte=float(rating))
+        
+    if has_discount:
+        products = products.filter(discount__gt=0)
     
     context = {
         'products':products,
