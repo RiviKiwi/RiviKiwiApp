@@ -5,13 +5,15 @@ passwordFields.forEach(field => {
   const eyeIcon = field.querySelector('.eye img');
   
   if (passwordInput && eyeIcon) {
+    // Сохраняем изначальные пути к изображениям
+    const closedEyePath = eyeIcon.src;
+    const openedEyePath = closedEyePath.replace('closed-eye.svg', 'opened-eye.svg');
+
     eyeIcon.addEventListener('click', () => {
       const isHidden = passwordInput.type === 'password';
       
       passwordInput.type = isHidden ? 'text' : 'password';
-      eyeIcon.src = isHidden
-        ? '/images/icons/opened-eye.svg'
-        : '/images/icons/closed-eye.svg';
+      eyeIcon.src = isHidden ? openedEyePath : closedEyePath;
     });
   }
 });

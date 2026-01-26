@@ -42,7 +42,11 @@ function selectSort(sortName) {
     document.getElementById('sortDropdown').classList.remove('show');
     console.log("Выбрана сортировка:", sortName);
 }
-
+/* Меню профиля в углу */
+function showAccountMenu() {
+    const dropdown = document.getElementById('accountDropdown');
+    dropdown.classList.toggle('show');
+}
 window.onclick = function(event) {
     if (!event.target.closest('.location-wrapper')) {
         const cityDrop = document.getElementById('cityDropdown');
@@ -56,13 +60,7 @@ window.onclick = function(event) {
             sortDrop.classList.remove('show');
         }
     }
-}
-/* Меню профиля в углу */
-function showAccountMenu() {
-    const dropdown = document.getElementById('accountDropdown');
-    dropdown.classList.toggle('show');
-}
-window.onclick = function(event) {
+    window.onclick = function(event) {
     if (!event.target.closest('.account-wrapper')) {
       const dropdown = document.getElementById('accountDropdown');
       if (dropdown.classList.contains('show')) {
@@ -70,3 +68,5 @@ window.onclick = function(event) {
       }
     }
 }
+}
+

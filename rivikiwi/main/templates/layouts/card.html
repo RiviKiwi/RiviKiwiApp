@@ -1,0 +1,22 @@
+{% load static %}
+<div class="products-grid">
+    {% for product in products%}
+    <a href="{% url 'catalog:product' product.slug %}" class="product-card">
+        <div class="image-placeholder gradient-green">
+            {% if product.get_first_picture %}
+                <img src="{{ product.get_first_picture.url }}">
+            {% else %}
+                <img src="{% static 'assets/images/log-background.svg' %}">
+            {% endif %}
+        </div>
+        <div class="card-info">
+            <p class="text-line medium">{{product.description}}</p>
+            <div class="product-price">{{product.price}}$</div>
+            <div class="product-location">
+                <img src="{% static 'assets/images/icons/location-pin-icon.svg' %}" height="15px" width="15px">
+                Минск
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
