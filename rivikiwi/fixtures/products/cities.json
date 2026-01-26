@@ -1,0 +1,44 @@
+[
+    {
+        "model": "products.city",
+        "pk": 1,
+        "fields": {
+            "name": "Минск"
+        }
+    },
+    {
+        "model": "products.city",
+        "pk": 2,
+        "fields": {
+            "name": "Брест"
+        }
+    },
+    {
+        "model": "products.city",
+        "pk": 3,
+        "fields": {
+            "name": "Гродно"
+        }
+    },
+    {
+        "model": "products.city",
+        "pk": 4,
+        "fields": {
+            "name": "Гомель"
+        }
+    },
+    {
+        "model": "products.city",
+        "pk": 5,
+        "fields": {
+            "name": "Витебск"
+        }
+    },
+    {
+        "model": "products.city",
+        "pk": 6,
+        "fields": {
+            "name": "Могилев"
+        }
+    }
+]
