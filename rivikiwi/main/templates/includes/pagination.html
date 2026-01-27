@@ -1,0 +1,31 @@
+{% load products_tags %}
+{% if products %}
+<!-- ПАГИНАЦИЯ -->
+    <nav class="pagination">
+
+        <a class="page-btn {% if not products.has_previous %}disabled{% endif %}" href="{% if products.has_previous %}?{% change_params page=products.previous_page_number %}{% else %}#{% endif %}">←</a>
+        <a class="page-btn {% if products.number == 1 %}active{% endif %}"{% if products.number != 1 %}href="?{% change_params page=1 %}"{% endif %}>1</a>
+        {% if products.number|add:-2 > 1 %}
+            <span class="page-dots">...</span>
+        {% endif %}
+        {% for page in products.paginator.page_range %}
+        {% if page > 1 and page < products.paginator.num_pages %}
+            {% if page == products.number %}
+                <a class="page-btn active">{{ page }}</a>
+            {% elif page >= products.number|add:-2 and page <= products.number|add:2 %}
+                <a class="page-btn" href="?{% change_params page=page %}">{{ page }}</a>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% if products.number|add:2 < products.paginator.num_pages %}
+            <span class="page-dots">...</span>
+        {% endif %}
+        {% if products.paginator.num_pages > 1 %}
+            <a class="page-btn {% if products.number == products.paginator.num_pages %}active{% endif %}" {% if products.number != products.paginator.num_pages %}href="?{% change_params page=products.paginator.num_pages %}"{% endif %}>
+                {{products.paginator.num_pages}}
+            </a>
+        {% endif %}
+        <a class="page-btn {% if not products.has_next %}disabled{% endif %}" href="{% if products.has_next %}?{% change_params page=products.next_page_number %}{% else %}#{% endif %}">→</a>
+
+    </nav>
+{% endif %}
