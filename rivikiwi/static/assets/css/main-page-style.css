@@ -109,14 +109,6 @@ input::placeholder {
   color: var(--green); 
 }
 
-.city-option2 {
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 14px;
-  background-color: var(--bg-color);
-  color: var(--green); 
-}
-
 .location {
   font-size: 16px;
   color: var(--text-brown);
@@ -191,6 +183,37 @@ input::placeholder {
 .accept button {
   width: 100%;
   justify-content: center;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+.favorite-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  stroke: var(--green);
+  fill:transparent;
+  background: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  padding:0;
+}
+.favorite-button:hover {
+  fill:var(--green);
+  transform: scale(0.9);
+  transition: 0.2s ease-in-out;
+}
+.favorite-button.favorite-product svg {
+  fill: var(--green);
+}
+.favorite-button:active {
+  transform: scale(0.9);
+  transition: 0.2s ease-in-out;
 }
 .header-bottom {
   border-top: 1px solid var(--border-color);
@@ -438,14 +461,6 @@ input::placeholder {
   font-size: 14px;
 }
 .sort-option:hover { background-color: var(--bg-color); color: var(--green); }
-
-.sort-option2{ 
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 14px;
-  background-color: var(--bg-color); 
-  color: var(--green); 
-}
 
 /* Сетка товаров */
 .products-grid {
@@ -759,4 +774,51 @@ input::placeholder {
 /*For Links in reviews*/
 .review-link {
   color:#777;
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.page-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: white;
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.page-btn:hover {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.page-btn.active {
+  background: var(--dark);
+  color: white;
+  border-color: var(--dark);
+  cursor: default;
+}
+
+.page-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-dots {
+  padding: 0 5px;
+  font-weight: 600;
+  color: var(--transparent-brown);
 }

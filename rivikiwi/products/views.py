@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from .models import Product, ProductCategory
 from .utils import q_search
 
@@ -10,6 +11,7 @@ def index(request, category_slug=None):
     order_by = request.GET.get("order_by", None)
     city = request.GET.get("city", None)
     query = request.GET.get("q", None)
+    page = request.GET.get("page", 1)
     print(query)
     
     if not category_slug:
@@ -42,9 +44,12 @@ def index(request, category_slug=None):
         
     if has_discount:
         products = products.filter(discount__gt=0)
+        
+    paginator = Paginator(products, 3)
+    page = paginator.page(page)
     
     context = {
-        'products':products,
+        'products':page,
         'category':category,
     }
     return render(request, 'products/index.html', context)
