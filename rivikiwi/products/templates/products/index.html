@@ -4,7 +4,16 @@
 {% block content %}
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
-        
+        <!-- Баннер -->
+        {% if not user.is_authenticated %}
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Продавайте ненужное,<br><span class="green-text">Покупайте что-то нужное.</span></h1>
+                    <p>Быстрая, безопасная и легкая платформа для каждого.</p>
+                    <a href={% url "users:login" %} class="btn btn-primary btn-large" >Начать сейчас</button></a>
+                </div>
+            </section>
+        {% endif %}
         <!-- Сетка: Сайдбар + Товары -->
         <div class="main-layout">
             
@@ -25,6 +34,9 @@
                     {% endif %}
                     {% if request.GET.city %}
                         <input type="hidden" name="city" value="{{ request.GET.city }}">
+                    {% endif %}
+                    {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
                     {% endif %}
                     <div class="input-block price-inputs">
                         <input type="number" min="0" id="start-price" placeholder="От" oninput="this.value = Math.abs(this.value)"
@@ -98,6 +110,9 @@
                                 {% endif %}
                                 {% if request.GET.max_price %}
                                     <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                                {% endif %}
+                                {% if request.GET.q %}
+                                    <input type="hidden" name="q" value="{{ request.GET.q }}">
                                 {% endif %}
                             </form>
                         </div>
