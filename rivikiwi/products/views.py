@@ -10,8 +10,8 @@ def index(request, category_slug=None):
     order_by = request.GET.get("order_by", None)
     city = request.GET.get("city", None)
     query = request.GET.get("q", None)
-    
-    category = ProductCategory.objects.get(slug=category_slug)
+    print(query)
+    category = ProductCategory.objects.get(slug=category_slug) if category_slug else None
     products = None
     
     if category_slug == "all": 

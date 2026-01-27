@@ -118,15 +118,12 @@ input::placeholder {
 }
 
 .location {
-  font-size: 14px;
-  color: var(--transparent-brown);
-  stroke: var(--transparent-brown);
+  font-size: 16px;
+  color: var(--text-brown);
+  stroke: var(--text-brown);
   display: flex;
   max-width: 200px; 
   align-items: center;
-  padding-right: 15px;
-  margin-right: 10px;
-  border-right: 1px solid var(--border-color);
   white-space: nowrap;
   gap: 5px;
 }

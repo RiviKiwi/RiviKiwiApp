@@ -1,4 +1,4 @@
 
-
+from .models import Product
 def q_search(query):
-    pass
+    return Product.objects.all()
