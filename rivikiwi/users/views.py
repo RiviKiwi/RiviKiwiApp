@@ -15,7 +15,7 @@ def login(request):
             if user:
                 auth.login(request, user)
                 print('hellow')
-                return HttpResponseRedirect(reverse('main:index'))
+                return HttpResponseRedirect(reverse('catalog:home'))
     else:
         form = UserAuthenticationForm()
     context = {
@@ -32,7 +32,7 @@ def registration(request):
             form.save()
             user = form.instance
             auth.login(request, user, backend=BACKEND)
-            return HttpResponseRedirect(reverse('main:index'))
+            return HttpResponseRedirect(reverse('catalog:home'))
     else:
         form = UserRegistrationForm()            
     context = {
@@ -43,4 +43,4 @@ def registration(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect(reverse('main:index'))
+    return redirect(reverse('catalog:home'))

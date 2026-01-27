@@ -25,7 +25,7 @@
                     {% elif category %}
                     {% url 'catalog:index' category.slug %}
                     {% else %}
-                    {% url 'main:index' %}
+                    {% url 'catalog:home' %}
                     {% endif %}" method="get" id="city-form">
                 <div class="filter price-filter">
                     <h3>Цена</h3>
