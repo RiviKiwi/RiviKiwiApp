@@ -10,16 +10,16 @@ def index(request, category_slug=None):
     order_by = request.GET.get("order_by", None)
     city = request.GET.get("city", None)
     query = request.GET.get("q", None)
-    print(query)
-    
-    if not category_slug:
-        category_slug = "all"
+   
+    # if not category_slug:
+    #     category_slug = "all"
         
-    category = ProductCategory.objects.get(slug=category_slug)
+    category = ProductCategory.objects.get(slug=category_slug) if category_slug else None
     products = None
     
-    if category_slug == "all": 
+    if category_slug == "all" or (not query and not category_slug): 
         products = Product.objects.all()
+        category = category = ProductCategory.objects.get(slug="all")
     elif query:
         products = q_search(query) 
     else:
