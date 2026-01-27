@@ -1,16 +1,25 @@
 from django.shortcuts import render
 from .models import Product, ProductCategory
+from .utils import q_search
 
-def index(request, category_slug):
+def index(request, category_slug=None):
     max_price = request.GET.get("max_price", None)
     min_price = request.GET.get("min_price", None)
     rating = request.GET.get("rating", None)
     has_discount = request.GET.get("has_discount", None)
     order_by = request.GET.get("order_by", None)
     city = request.GET.get("city", None)
+    query = request.GET.get("q", None)
     
     category = ProductCategory.objects.get(slug=category_slug)
-    products = Product.objects.all() if category_slug == "all" else Product.objects.filter(category__slug=category_slug)
+    products = None
+    
+    if category_slug == "all": 
+        products = Product.objects.all()
+    elif query:
+        products = q_search(query) 
+    else:
+        products = Product.objects.filter(category__slug=category_slug)
     
     if order_by:
         products = products.order_by(order_by)

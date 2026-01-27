@@ -20,7 +20,12 @@
                     {% endif %}" method="get" id="city-form">
                 <div class="filter price-filter">
                     <h3>Цена</h3>
-                    
+                    {% if request.GET.order_by %}
+                        <input type="hidden" name="order_by" value="{{ request.GET.order_by}}">
+                    {% endif %}
+                    {% if request.GET.city %}
+                        <input type="hidden" name="city" value="{{ request.GET.city }}">
+                    {% endif %}
                     <div class="input-block price-inputs">
                         <input type="number" min="0" id="start-price" placeholder="От" oninput="this.value = Math.abs(this.value)"
                     onkeydown="return event.key !== '-'" name="min_price" value="{% if request.GET.min_price %}{{ request.GET.min_price }}{% endif %}">
@@ -57,20 +62,43 @@
                             <path d="M10 6.99998C10 6.99998 7.79053 4.00001 6.99998 4C6.20942 3.99999 4 7 4 7"/>
                             <path d="M20 17C20 17 17.7905 20 17 20C16.2094 20 14 17 14 17"/>
                         </svg>
-                        <span id="currentSort">Сначала новые</span>
+                        <span id="currentSort">
+                            {% if request.GET.order_by == 'date' or not request.GET.order_by %}
+                                Сначала новые
+                            {% elif request.GET.order_by == 'price' %}
+                                Сначала дешевые
+                            {% elif request.GET.order_by == '-price' %}
+                                Сначала дорогие
+                            {% endif %}
+                        </span>
                     </button>
                         <div class="sort-dropdown" id="sortDropdown">
                             <form action="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:index' category.slug %}{% endif %}" method="get" id="sort-form">
                                 <input type="hidden" name='order_by' id='order_by_input'>
-                                <div class="sort-option" onclick="submitSortForm('date')">
+                                <div class="sort-option{%if request.GET.order_by == 'date' or not request.GET.order_by %}2{% endif %}" onclick="submitSortForm('date')">
                                     Сначала новые
                                 </div>
-                                <div class="sort-option" onclick="submitSortForm('price')">
+                                <div class="sort-option{%if request.GET.order_by == 'price' %}2{% endif %}" onclick="submitSortForm('price')">
                                     Сначала дешевые
                                 </div>
-                                <div class="sort-option" onclick="submitSortForm('-price')">
+                                <div class="sort-option{%if request.GET.order_by == '-price' %}2{% endif %}" onclick="submitSortForm('-price')">
                                     Сначала дорогие
                                 </div>
+                                {% if request.GET.city %}
+                                    <input type="hidden" name="city" value="{{ request.GET.city }}">
+                                {% endif %}
+                                {% if request.GET.rating %}
+                                    <input type="hidden" name="rating" value="{{ request.GET.rating }}">
+                                {% endif %}
+                                {% if request.GET.has_discount %}
+                                    <input type="hidden" name="has_discount" value="{{ request.GET.has_discount }}">
+                                {% endif %}
+                                {% if request.GET.min_price %}
+                                    <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                                {% endif %}
+                                {% if request.GET.max_price %}
+                                    <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                                {% endif %}
                             </form>
                         </div>
                 </div>

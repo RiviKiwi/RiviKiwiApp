@@ -109,6 +109,14 @@ input::placeholder {
   color: var(--green); 
 }
 
+.city-option2 {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color);
+  color: var(--green); 
+}
+
 .location {
   font-size: 14px;
   color: var(--transparent-brown);
@@ -433,6 +441,14 @@ input::placeholder {
   font-size: 14px;
 }
 .sort-option:hover { background-color: var(--bg-color); color: var(--green); }
+
+.sort-option2{ 
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color); 
+  color: var(--green); 
+}
 
 /* Сетка товаров */
 .products-grid {
