@@ -30,7 +30,7 @@
                 </a>
                 <form class="search-bar" action="{% url 'catalog:search' %}" method="get">
                     <img src="{% static 'assets/images/icons/search-icon.svg' %}">
-                    <input type="search" name="q" placeholder="Что вы ищете?" id="search-bar" required>
+                    <input type="search" name="q" placeholder="Что вы ищете?" value = "{%if request.GET.q %}{{request.GET.q}}{% endif %}" id="search-bar" required>
                     <button type="submit" class="btn-search btn-primary">Найти</button>
                 </form>
                 <div class="location-wrapper">

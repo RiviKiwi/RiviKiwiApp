@@ -789,6 +789,9 @@ input::placeholder {
   min-width: 42px;
   height: 42px;
   padding: 0 14px;
+  width: 42px;
+  height: 42px;
+
   border-radius: 50%;
   border: 1px solid var(--border-color);
   background: white;
@@ -797,6 +800,11 @@ input::placeholder {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .page-btn:hover {
@@ -821,4 +829,20 @@ input::placeholder {
   padding: 0 5px;
   font-weight: 600;
   color: var(--transparent-brown);
+}
+
+.sort-option2{ 
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color); 
+  color: var(--green); 
+}
+
+.city-option2 {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color);
+  color: var(--green); 
 }
