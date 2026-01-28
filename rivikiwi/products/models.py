@@ -21,6 +21,7 @@ class City(models.Model):
     name = models.CharField(
         max_length=35, blank=True, null=True, unique=True, verbose_name="Город"
     )
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="url")
 
     class Meta:
         db_table = "city"
