@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from reviews.forms import ReviewForm
 from reviews.models import Review
 from reviews.utils import seller_reviews
+from users.models import User
 
 
 def all_reviews(request, seller_username):
@@ -28,7 +29,7 @@ def create_review(request, seller_username):
     reviews = seller_reviews(seller_username)
 
     if request.method == "POST":
-        seller = get_object_or_404(Review, seller__username=seller_username)
+        seller = User.objects.get(username=seller_username)
         form = ReviewForm(data=request.POST)
 
         if form.is_valid():
