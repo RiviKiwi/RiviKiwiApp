@@ -1,14 +1,9 @@
 from django.contrib import admin
-from reviews.models import Review, ReviewImage
+from reviews.models import Review
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display=['id', 'text', 'user', 'product', 'rating']
-    search_fields=['id']
-
-@admin.register(ReviewImage)
-class ReviewImageAdmin(admin.ModelAdmin):
-    list_display=['id', 'image']
+    list_display=['id', 'text', 'seller', 'consumer', 'rating']
     search_fields=['id']
     
