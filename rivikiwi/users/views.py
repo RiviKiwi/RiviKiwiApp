@@ -3,47 +3,63 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import UserAuthenticationForm, UserRegistrationForm
 from django.contrib import auth
+from users.models import User
 
 
 def login(request):
     if request.method == "POST":
-        form = UserAuthenticationForm(data = request.POST)
+        form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            username = request.POST.get("username")
+            password = request.POST.get("password")
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
                 redirect_page = request.POST.get("next", None)
-                if redirect_page and redirect_page != reverse('users:logout'):
+                if redirect_page and redirect_page != reverse("users:logout"):
                     return HttpResponseRedirect(redirect_page)
-                
-                return HttpResponseRedirect(reverse('catalog:home'))
+
+                return HttpResponseRedirect(reverse("catalog:home"))
     else:
         form = UserAuthenticationForm()
     context = {
-        'form':form,
+        "form": form,
     }
-    return render(request, 'users/login.html', context)
+    return render(request, "users/login.html", context)
 
 
 def registration(request):
-    BACKEND = 'django.contrib.auth.backends.ModelBackend'
+    BACKEND = "django.contrib.auth.backends.ModelBackend"
     if request.method == "POST":
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
             user = form.instance
             auth.login(request, user, backend=BACKEND)
-            return HttpResponseRedirect(reverse('catalog:home'))
+            return HttpResponseRedirect(reverse("catalog:home"))
     else:
-        form = UserRegistrationForm()            
+        form = UserRegistrationForm()
     context = {
-        'form':form,
+        "form": form,
     }
-    return render(request, 'users/registration.html', context)
+    return render(request, "users/registration.html", context)
+
+
+def profile(request, username):
+    user = None
+    if request.user.username != username:
+        user = User.objects.get(username=username)
+    print(user)
+    if user:
+        context = {
+            "seller" : user
+        }
+        print(context)
+        return render(request, "users/user-profile.html", context)
+    
+    return render(request, "users/self-profile.html")
 
 
 def logout(request):
     auth.logout(request)
-    return redirect(reverse('catalog:home'))
+    return redirect(reverse("catalog:home"))

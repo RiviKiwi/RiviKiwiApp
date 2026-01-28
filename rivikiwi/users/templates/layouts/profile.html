@@ -1,0 +1,95 @@
+{% load static %}
+{% load products_tags %}
+
+{% block css %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль пользователя — RiviKiwi</title>
+  <link rel="icon" href="{% static 'assets/images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
+  <!-- Основные стили сайта -->
+  <link rel="stylesheet" href={% static "assets/css/main-page-style.css" %}>
+</head>
+<body>
+{% endblock css %}
+
+{% block header %}
+<header class="site-header">
+
+  <div class="container">
+    <div class="header-top">
+
+      <!-- Логотип -->
+      <a href="{% url "catalog:home" %}" class="logo">
+        <span class="logo-text">Rivi<span class="green-text">Kiwi</span></span>
+      </a>
+
+      <!-- Поиск -->
+      <div class="search-bar">
+        <img src="{% static "assets/images/icons/search-icon.svg" %}" alt="Поиск">
+        <input type="text" placeholder="Что вы ищете?">
+        <button class="btn-search">Найти</button>
+      </div>
+
+      <!-- Кнопки -->
+      <div class="header-actions">
+        <a href="{% url "users:logout" %}" class="btn btn-primary">
+          Выйти
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Навигация -->
+  <nav class="header-bottom">
+    <div class="container categories-container">
+      {% all_categories as categories %}
+      {% for category in categories %}
+        <a href="{% url 'catalog:index' category.slug %}" class="cat-link">{{ category.name }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+</header>
+{% endblock header %}
+
+{% block content %}
+
+{% endblock  %}
+
+{% block footer %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+
+      <div class="footer-col">
+        <div class="logo footer-logo">
+          <span>RiviKiwi</span>
+        </div>
+        <p class="footer-desc">
+          Надежная торговая площадка для покупок и продаж.
+          Безопасно и удобно.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>О нас</h3>
+        <a href="#">Чем занимаемся</a>
+        <a href="#">Вакансии</a>
+        <a href="#">Новости</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Поддержка</h3>
+        <a href="#">Помощь</a>
+        <a href="#">Правила</a>
+        <a href="#">Контакты</a>
+      </div>
+
+    </div>
+  </div>
+</footer>
+{% endblock footer %}

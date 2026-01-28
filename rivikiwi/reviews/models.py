@@ -3,7 +3,10 @@ from rivikiwi import settings
 
 class ReviewQuerySet(models.QuerySet):
     def avg_rating(self):
-        return round(sum(review.rating for review in self) / len(self), 1)
+        try:
+            return round(sum(review.rating for review in self) / len(self), 1)
+        except ZeroDivisionError:
+            return 0.0
     
     def reviews_count(self):
         return len(self)
