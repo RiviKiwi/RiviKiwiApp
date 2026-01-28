@@ -14,7 +14,10 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                print('hellow')
+                redirect_page = request.POST.get("next", None)
+                if redirect_page and redirect_page != reverse('users:logout'):
+                    return HttpResponseRedirect(redirect_page)
+                
                 return HttpResponseRedirect(reverse('catalog:home'))
     else:
         form = UserAuthenticationForm()

@@ -126,7 +126,7 @@ DATABASES = {
     'default': {  
         'ENGINE': 'django.db.backends.postgresql',  
         'NAME': env('DATABASE_NAME'),  
-        'USER': env('USERNAME'),  
+        'USER': env('USER'),  
         'PASSWORD': env('DATABASE_PASSWORD'),  # пароль  
     }  
 }
@@ -167,6 +167,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 LOGIN_REDIRECT_URL='/'
+LOGIN_URL = '/user/login/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
