@@ -42,8 +42,8 @@
                           
                             <span class="location-text">
                                 <a class="current-city">
-                                    {% if not request.GET.city or request.GET.city == "Минск" %}
-                                        Минск
+                                    {% if not request.GET.city or request.GET.city == "Любой город" %}
+                                        Любой город
                                     {% else %}
                                         {{request.GET.city}}
                                     {% endif %}
@@ -59,9 +59,9 @@
                                 <input type="hidden" name="city" id="city_input">
                                 {% all_cities as cities %}
                                 {% for city in cities %}
-                                    <div class="city-option{%if not request.GET.city and city.name == 'Минск' %}2{% elif request.GET.city == city.name %}2{% endif %}" 
+                                    <div class="city-option{%if not request.GET.city and city.name == 'Любой город' %}2{% elif request.GET.city == city.name %}2{% endif %}" 
                                         onclick="selectCityWithSubmit('{{ city }}')">
-                                        {{ city }}
+                                        {{ city.name }}
                                     </div>
                                 {% endfor %}
                                 {% if request.GET.order_by %}

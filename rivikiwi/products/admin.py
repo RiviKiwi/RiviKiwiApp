@@ -21,5 +21,6 @@ class ProductImageAdmin(admin.ModelAdmin):
     
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
-    list_display=['id', 'name']
-    search_fields=['id', 'name']
+    prepopulated_fields = {'slug':('name',)}
+    list_display=['id', 'name', 'slug']
+    search_fields=['id', 'name', 'slug']

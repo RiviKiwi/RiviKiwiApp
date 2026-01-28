@@ -31,7 +31,7 @@ def index(request, category_slug=None):
     if order_by:
         products = products.order_by(order_by)
         
-    if city:
+    if city and city != 'Любой город':
         products = products.filter(city__name=city)
         
     if min_price and min_price != '0':
@@ -46,7 +46,7 @@ def index(request, category_slug=None):
     if has_discount:
         products = products.filter(discount__gt=0)
         
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 1)
     page = paginator.page(page)
     
     context = {
