@@ -59,9 +59,7 @@
                                 <input type="hidden" name="city" id="city_input">
                                 {% all_cities as cities %}
                                 {% for city in cities %}
-                                    <div class="city-option{% if not request.GET.city %}
-                                        {% if city == 'Минск' %}2{% endif %}
-                                        {% elif request.GET.city == city.name %}2{% endif %}" 
+                                    <div class="city-option{%if not request.GET.city and city.name == 'Минск' %}2{% elif request.GET.city == city.name %}2{% endif %}" 
                                         onclick="selectCityWithSubmit('{{ city }}')">
                                         {{ city }}
                                     </div>
