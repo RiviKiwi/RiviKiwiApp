@@ -47,6 +47,7 @@ class Product(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь"
     )
     city = models.ForeignKey(to=City, on_delete=models.CASCADE, related_name="city", verbose_name="Город")
+    creation_date = models.DateField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
         db_table = "products"

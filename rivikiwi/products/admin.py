@@ -11,7 +11,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields  = {'slug':('name',)}
-    list_display=['name', 'slug', 'price', 'category']
+    list_display=['name', 'slug', 'price', 'category', 'creation_date']
     search_fields=['name', 'slug']
     
 @admin.register(ProductImage)

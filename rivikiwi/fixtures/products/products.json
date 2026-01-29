@@ -10,7 +10,8 @@
             "price": "100.00",
             "discount": 12,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-22"
         }
     },
     {
@@ -24,7 +25,8 @@
             "price": "56.00",
             "discount": 0,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-29"
         }
     },
     {
@@ -38,7 +40,8 @@
             "price": "330.00",
             "discount": 11,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-29"
         }
     },
     {
@@ -52,7 +55,8 @@
             "price": "134.00",
             "discount": null,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-29"
         }
     },
     {
@@ -66,7 +70,8 @@
             "price": "129.00",
             "discount": 4,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-29"
         }
     },
     {
@@ -80,7 +85,8 @@
             "price": "12.00",
             "discount": 3,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-23"
         }
     },
     {
@@ -94,7 +100,8 @@
             "price": "39.00",
             "discount": 1,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-27"
         }
     },
     {
@@ -108,7 +115,8 @@
             "price": "56.00",
             "discount": 2,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-26"
         }
     },
     {
@@ -122,7 +130,8 @@
             "price": "234.00",
             "discount": null,
             "user": 1,
-            "city": 1
+            "city": 1,
+            "creation_date" : "2026-01-21"
         }
     }
 ]

@@ -76,7 +76,7 @@
                             <path d="M20 17C20 17 17.7905 20 17 20C16.2094 20 14 17 14 17"/>
                         </svg>
                         <span id="currentSort">
-                            {% if request.GET.order_by == 'date' or not request.GET.order_by %}
+                            {% if request.GET.order_by == '-creation_date' or not request.GET.order_by %}
                                 Сначала новые
                             {% elif request.GET.order_by == 'price' %}
                                 Сначала дешевые
@@ -88,7 +88,7 @@
                         <div class="sort-dropdown" id="sortDropdown">
                             <form action="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:index' category.slug %}{% endif %}" method="get" id="sort-form">
                                 <input type="hidden" name='order_by' id='order_by_input'>
-                                <div class="sort-option{%if request.GET.order_by == 'date' or not request.GET.order_by %}2{% endif %}" onclick="submitSortForm('date')">
+                                <div class="sort-option{%if request.GET.order_by == '-creation_date' or not request.GET.order_by %}2{% endif %}" onclick="submitSortForm('-creation_date')">
                                     Сначала новые
                                 </div>
                                 <div class="sort-option{%if request.GET.order_by == 'price' %}2{% endif %}" onclick="submitSortForm('price')">
