@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from environ import Env
+from email import charset
+charset.add_charset('utf-8', charset.QP, charset.QP, 'utf-8')
 
 env = Env()
 env.read_env()
@@ -169,8 +171,6 @@ USE_TZ = True
 LOGIN_REDIRECT_URL='/'
 LOGIN_URL = '/user/login/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 ACCOUNT_LOGIN_METHODS = {'email'}
 
 # ACCOUNT_EMAIL_REQUIRED = True
@@ -203,3 +203,17 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST ="smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "bashuraartem@yandex.ru"
+EMAIL_USE_SSL = True
+
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER

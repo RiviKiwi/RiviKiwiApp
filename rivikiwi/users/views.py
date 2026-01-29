@@ -45,8 +45,9 @@ def registration(request):
     return render(request, "users/registration.html", context)
 
 
-def profile(request, username):
+def profile(request, username=None):
     user = None
+    
     if request.user.username != username:
         user = User.objects.get(username=username)
     print(user)
@@ -63,3 +64,5 @@ def profile(request, username):
 def logout(request):
     auth.logout(request)
     return redirect(reverse("catalog:home"))
+
+
