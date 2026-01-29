@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .forms import UserAuthenticationForm, UserRegistrationForm
+from .forms import UserAuthenticationForm, UserRegistrationForm, ProfileForm
 from django.contrib import auth
 from users.models import User
 
@@ -45,20 +45,25 @@ def registration(request):
     return render(request, "users/registration.html", context)
 
 
-def profile(request, username=None):
-    user = None
-    
+def profile(request, username):
+    if request.method == "POST":
+        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("users:profile", username=username)
+    else:
+        form = ProfileForm(instance=request.user)
+        
     if request.user.username != username:
-        user = User.objects.get(username=username)
-    print(user)
-    if user:
         context = {
-            "seller" : user
-        }
-        print(context)
+             "seller" : User.objects.get(username=username)
+         }
         return render(request, "users/user-profile.html", context)
-    
-    return render(request, "users/self-profile.html")
+    else:
+        context = {
+             "form" : form
+         }
+        return render(request, "users/self-profile.html", context)
 
 
 def logout(request):
