@@ -40,7 +40,8 @@ class ProfileForm(UserChangeForm):
             "middle_name",
             "username",
             "phone", 
-            "email"
+            "email",
+            "profile_description"
             )
 
     avatar = forms.ImageField(required=False)
@@ -50,3 +51,4 @@ class ProfileForm(UserChangeForm):
     username = forms.CharField()
     phone=forms.CharField()
     email = forms.CharField()
+    profile_description = forms.CharField()

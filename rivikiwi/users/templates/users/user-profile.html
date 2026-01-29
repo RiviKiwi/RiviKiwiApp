@@ -12,7 +12,11 @@
     <!-- ===== ЛЕВАЯ КОЛОНКА (ПРОФИЛЬ) ===== -->
     <aside class="profile-card">
 
-      <img src="{% static "assets/images/users/ava.png" %}" alt="Аватар" class="profile-avatar">
+      {% if seller.avatar %}
+        <img src="{{ seller.avatar.url }}" alt="Аватар" class="profile-avatar">
+      {% else %}
+        <img src="{% static "assets/images/users/ava.png" %}" alt="Аватар" class="profile-avatar">
+      {% endif %}
 
       <h2 class="profile-name">{{ seller.get_fullname }}</h2>
       <div class="profile-nickname">{{ seller.username }}</div>

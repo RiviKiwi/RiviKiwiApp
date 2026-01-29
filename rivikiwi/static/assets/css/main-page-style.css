@@ -934,3 +934,57 @@ input::placeholder {
   margin: 20px 0;
   justify-content: center;
 }
+
+/* ===== ОПИСАНИЕ ПРОФИЛЯ (ОТОБРАЖЕНИЕ) ===== */
+.profile-description-display {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid var(--green);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-brown);
+}
+
+.profile-description-display p {
+  margin: 0;
+  color: var(--dark);
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ===== ТЕКСТОВОЕ ПОЛЕ ДЛЯ ОПИСАНИЯ ===== */
+.profile-field-textarea {
+  font-size: 13px;
+  color: var(--transparent-brown);
+  gap: 5px;
+  grid-column: 1 / -1; /* Растягиваем на всю ширину формы */
+}
+
+.profile-field-textarea textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--dark);
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.profile-field-textarea textarea::placeholder {
+  color: var(--transparent-brown);
+  opacity: 1;
+}
+
+.profile-field-textarea textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(144, 200, 37, 0.1);
+}

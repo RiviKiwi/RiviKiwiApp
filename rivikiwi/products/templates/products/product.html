@@ -56,7 +56,11 @@
       {% get_seller_reviews product.user as seller_reviews %}
       <div class="seller-card">
         <div class="seller-header">
-          <img src="{% static 'assets/images/products/ava.png' %}" class="seller-avatar">
+          {% if product.user.avatar %}
+            <img src="{{ product.user.avatar.url }}" class="seller-avatar">
+          {% else %}
+            <img src="{% static 'assets/images/products/ava.png' %}" class="seller-avatar">
+          {% endif %}
           <div>
             <div class="seller-name">
               <a href="{% url "users:profile" product.user.username %}">
@@ -71,10 +75,11 @@
           </div>
         </div>
 
-        <p class="seller-description">
-          Частный продавец. На RiviKiwi с 2022 года.
-          Отвечаю быстро, возможен торг.
-        </p>
+        {% if product.user.profile_description %}
+          <p class="seller-description">
+            {{ product.user.profile_description }}
+          </p>
+        {% endif %}
       </div>
 
     </div>

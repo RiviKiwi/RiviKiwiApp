@@ -41,6 +41,12 @@
             <span>📞 {{ user.phone }}</span>
           </div>
 
+          {% if user.profile_description %}
+            <div class="profile-description-display">
+              <p>{{ user.profile_description }}</p>
+            </div>
+          {% endif %}
+
         </div>
 
         <button class="btn btn-outline edit-profile-btn" id="editProfileBtn">
@@ -81,6 +87,11 @@
           <label for="id_middle_name"class="profile-field">
             Отчество
             <input type="text" placeholder="Иванович" id="id_middle_name" name="middle_name" value="{{form.middle_name.value}}"/>
+          </label>
+
+          <label class="profile-field profile-field-textarea">
+              Описание профиля
+              <textarea placeholder="Расскажите о себе..." rows="4" name="profile_description">{{form.profile_description.value}}</textarea>
           </label>
 
           <button type="submit" class="btn btn-primary btn-large">
