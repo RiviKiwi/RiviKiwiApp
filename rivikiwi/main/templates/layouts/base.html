@@ -125,22 +125,16 @@
             </div>
         </div>
         <!-- Нижний этаж (Навигация) -->
+        {% block categories_nav %}
         <nav class="header-bottom">
             <div class="container categories-container">
                 {% all_categories as categories %}
                 {% for category in categories %}
                     <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if category.slug == 'all'%}active{% endif %}">{{ category.name }}</a>
                 {% endfor %}
-                <!-- <a href="#" class="cat-link active">Все</a>
-                <a href="#" class="cat-link">Электроника</a>
-                <a href="#" class="cat-link">Недвижимость</a>
-                <a href="#" class="cat-link">Авто и запчасти</a>
-                <a href="#" class="cat-link">Одежда</a>
-                <a href="#" class="cat-link">Дом и сад</a>
-                <a href="#" class="cat-link">Услуги</a>
-                <a href="#" class="cat-link">Хобби</a> -->
             </div>
         </nav>
+{% endblock  %}
     </header>
 {% endblock header%}
 
