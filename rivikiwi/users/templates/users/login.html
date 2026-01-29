@@ -37,7 +37,7 @@
       </form>
 
       <p class="no-account">Нет профиля? <a href="{% url 'users:registration'%}" class="link">Создайте его!</a></p>
-      <p class="no-account"><a class="link" href="{% url 'users:password_reset' %}">Забыли пароль?</a></p>
+      <p class="no-account">Или <a href="{% url 'users:password_reset' %}" class="link">Сменить пароль</a></p>
       <div class="socials">
         <a href="{% provider_login_url 'google'%}"><img src="{% static 'assets/images/icons/google-icon.svg' %}" alt="Google"></a>
         <a href="{% provider_login_url 'yandex' %}"><img src="{% static 'assets/images/icons/yandex.svg' %}" alt="Yandex"></a>
