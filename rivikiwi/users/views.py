@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import UserAuthenticationForm, UserRegistrationForm, ProfileForm
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from users.models import User
 
 
@@ -44,7 +45,7 @@ def registration(request):
     }
     return render(request, "users/registration.html", context)
 
-
+@login_required
 def profile(request, username):
     if request.method == "POST":
         form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
@@ -65,7 +66,7 @@ def profile(request, username):
          }
         return render(request, "users/self-profile.html", context)
 
-
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect(reverse("catalog:home"))

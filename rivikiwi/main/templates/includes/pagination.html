@@ -1,5 +1,5 @@
 {% load products_tags %}
-{% if products %}
+{% if products and products.paginator.num_pages > 1 %}
 <!-- ПАГИНАЦИЯ -->
     <nav class="pagination">
 
@@ -20,11 +20,9 @@
         {% if products.number|add:3 < products.paginator.num_pages %}
             <span class="page-dots">...</span>
         {% endif %}
-        {% if products.paginator.num_pages > 1 %}
-            <a class="page-btn {% if products.number == products.paginator.num_pages %}active{% endif %}" {% if products.number != products.paginator.num_pages %}href="?{% change_params page=products.paginator.num_pages %}"{% endif %}>
-                {{products.paginator.num_pages}}
-            </a>
-        {% endif %}
+        <a class="page-btn {% if products.number == products.paginator.num_pages %}active{% endif %}" {% if products.number != products.paginator.num_pages %}href="?{% change_params page=products.paginator.num_pages %}"{% endif %}>
+            {{products.paginator.num_pages}}
+        </a>
         <a class="page-btn {% if not products.has_next %}disabled{% endif %}" href="{% if products.has_next %}?{% change_params page=products.next_page_number %}{% else %}#{% endif %}">→</a>
 
     </nav>

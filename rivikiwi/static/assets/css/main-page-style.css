@@ -786,8 +786,6 @@ input::placeholder {
 }
 
 .page-btn {
-  min-width: 42px;
-  height: 42px;
   width: 42px;
   height: 42px;
 
@@ -795,6 +793,7 @@ input::placeholder {
   border: 1px solid var(--border-color);
   background: white;
   color: var(--dark);
+
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -830,20 +829,8 @@ input::placeholder {
   color: var(--transparent-brown);
 }
 
-.sort-option2{ 
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 14px;
-  background-color: var(--bg-color); 
-  color: var(--green); 
-}
-
-.city-option2 {
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 14px;
-  background-color: var(--bg-color);
-  color: var(--green); 
+.create-ad-link {
+  color:#2D2C28;
 }
 
 /* ===== PROFILE EDIT ===== */
@@ -991,4 +978,19 @@ input::placeholder {
 
 .change_password {
   margin-bottom:15px;
+}
+.sort-option2{ 
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color); 
+  color: var(--green); 
+}
+
+.city-option2 {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: var(--bg-color);
+  color: var(--green); 
 }

@@ -1,7 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Product, ProductCategory
+from django.urls import reverse
+from .models import Product, ProductCategory, City, ProductImage
 from .utils import q_search
+from .forms import AddProductForm
+from django.contrib.auth.decorators import login_required
 
 def index(request, category_slug=None):
     max_price = request.GET.get("max_price", None)
@@ -45,7 +49,7 @@ def index(request, category_slug=None):
         
     if has_discount:
         products = products.filter(discount__gt=0)
-        
+
     paginator = Paginator(products, 3)
     page = paginator.page(page)
     
@@ -63,3 +67,32 @@ def product(request, product_slug):
         'product':product,    
     }
     return render(request, 'products/product.html', context)
+
+@login_required
+def add_product(request):
+    if request.method=="POST":
+        form = AddProductForm(data=request.POST)
+        
+        category_sl = request.POST.get('category')
+        city_sl = request.POST.get('city')
+        images = request.FILES.getlist("images")
+        
+        if (len(images)<10):
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                category = ProductCategory.objects.get(slug=category_sl)
+                city = City.objects.get(slug=city_sl)
+                new_form.category = category
+                new_form.city = city
+                new_form.user = request.user
+                new_form.save()
+                for i,image in enumerate(images):
+                    is_main = True if i==0 else False
+                    ProductImage.objects.create(image=image, product=new_form, is_main=is_main)
+                return HttpResponseRedirect(reverse('catalog:home'))
+    else:
+        form = AddProductForm()
+    context={
+        'form':form,
+    }
+    return render(request, 'products/product_add_form.html', context)
