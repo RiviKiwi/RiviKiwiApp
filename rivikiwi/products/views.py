@@ -5,6 +5,7 @@ from django.urls import reverse
 from .models import Product, ProductCategory, City, ProductImage
 from .utils import q_search
 from .forms import AddProductForm
+from django.contrib.auth.decorators import login_required
 
 def index(request, category_slug=None):
     max_price = request.GET.get("max_price", None)
@@ -67,7 +68,7 @@ def product(request, product_slug):
     }
     return render(request, 'products/product.html', context)
 
-
+@login_required
 def add_product(request):
     if request.method=="POST":
         form = AddProductForm(data=request.POST)
@@ -76,18 +77,19 @@ def add_product(request):
         city_sl = request.POST.get('city')
         images = request.FILES.getlist("images")
         
-        if form.is_valid():
-            new_form = form.save(commit=False)
-            category = ProductCategory.objects.get(slug=category_sl)
-            city = City.objects.get(slug=city_sl)
-            new_form.category = category
-            new_form.city = city
-            new_form.user = request.user
-            new_form.save()
-            for i,image in enumerate(images):
-                is_main = True if i==0 else False
-                ProductImage.objects.create(image=image, product=new_form, is_main=is_main)
-            return HttpResponseRedirect(reverse('catalog:home'))
+        if (len(images)<10):
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                category = ProductCategory.objects.get(slug=category_sl)
+                city = City.objects.get(slug=city_sl)
+                new_form.category = category
+                new_form.city = city
+                new_form.user = request.user
+                new_form.save()
+                for i,image in enumerate(images):
+                    is_main = True if i==0 else False
+                    ProductImage.objects.create(image=image, product=new_form, is_main=is_main)
+                return HttpResponseRedirect(reverse('catalog:home'))
     else:
         form = AddProductForm()
     context={
