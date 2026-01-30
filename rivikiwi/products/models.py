@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 
 
 class ProductCategory(models.Model):
@@ -74,6 +75,18 @@ class Product(models.Model):
     def get_images(self):
         res_images = self.images.all()
         return res_images if res_images else None
+    
+    def save(self, *args, **kwargs):
+        new_slug = f"{self.category}-{self.name}"
+        unique_slug = slugify(new_slug)
+        counter = 1
+        original_slug = unique_slug
+        while self.__class__.objects.filter(slug=unique_slug).exists():
+            unique_slug = f"{original_slug}-{counter}"
+            counter += 1
+
+        self.slug = unique_slug
+        super().save(*args, **kwargs)
 
 
 class ProductImage(models.Model):

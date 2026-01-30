@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+{% load products_tags %}
+{% block css %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Создать объявление — RiviKiwi</title>
+  <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/create-ad.css' %}">
+{% endblock css %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<!-- ===== MAIN ===== -->
+<main class="container create-ad-page">
+
+  <h1 class="page-title">Создание объявления</h1>
+
+  <form class="create-ad-form" action="{% url 'catalog:add_product' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>
+      Название
+      <input type="text" id="name_id" name="name" placeholder="Введите название товара" required>
+    </label>
+
+    <label>
+      Категория
+      <select id="category_id" name="category">
+        {% all_categories as categories %}
+        <option {% if not request.GET.category %}selected{% endif %} value="default">Категория не выбрана </option>
+        {% for category in categories %}
+            {% if category.slug != "all" %}
+                <option {% if request.GET.category == category.slug %}selected{% endif %} value="{{ category.slug }}">{{ category.name }}</option>
+            {% endif %}
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>
+      Описание
+      <textarea rows="5"  id="name_id" name="description" placeholder="Опишите товар подробно"></textarea>
+    </label>
+
+    <!-- ===== IMAGES ===== -->
+    <div class="image-upload">
+      <span class="upload-title">Фотографии</span>
+
+      <label class="upload-box">
+        <input type="file" id="images_id" name="images" multiple accept="image/*">
+        <span>➕ Добавить фото</span>
+      </label>
+
+      <div class="image-preview" id="imagePreview"></div>
+    </div>
+
+    <label>
+      Цена
+      <input type="number" id="price_id" name="price" placeholder="0.00">
+    </label>
+
+    <label>
+      Скидка
+      <input type="number" id="discount_id" name="discount" placeholder="0">
+    </label>
+
+    <label>
+      Город
+      <select id="city_id" name="city">
+        {% all_cities as cities %}
+        <option {% if not request.GET.city %}selected{% endif %} value="default">Город не выбран</option>
+        {% for city in cities %}
+            {% if city.slug != "all_cities" %}
+                <option {% if request.GET.city == city.slug %}selected{% endif %} value="{{ city.slug }}">{{ city.name }}</option>
+            {% endif %}
+        {% endfor %}
+      </select>
+    </label>
+
+    <button type="submit" class="btn btn-primary btn-submit">
+      Опубликовать объявление
+    </button>
+    
+  </form>
+  <script src="{% static 'assets/js/create-ad.js' %}"></script>
+{% endblock content %}
+
+
+{% block footer %}
+{% endblock footer %}
