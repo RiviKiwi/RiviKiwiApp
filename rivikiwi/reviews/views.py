@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from reviews.forms import ReviewForm
@@ -65,11 +65,15 @@ def edit_review(request, review_id):
 
 
 @login_required
-def delete_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-
-    if request.method == "POST":
-        review.delete()
-        return HttpResponseRedirect(reverse("reviews:all_reviews"))
-
-    return render(request, "reviews/all_reviews.html")
+def delete_review(request):
+    print("allo")
+    review_id = request.POST.get("review_id")
+    print(type(review_id))
+    review = Review.objects.get(id=review_id)
+    review.delete()
+    
+    response_data = {
+        "message" : "Отзыв успешно удален"
+    }
+    
+    return JsonResponse(response_data)

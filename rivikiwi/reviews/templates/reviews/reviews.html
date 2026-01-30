@@ -58,7 +58,8 @@
 
 <!-- ===== MAIN ===== -->
 <main class="container reviews-page">
-
+<div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
+</div>
   <!-- ===== TABS ===== -->
   <div class="reviews-tabs">
     <button class="tab active" data-tab="all">Все отзывы</button>
@@ -120,6 +121,15 @@
         <p class="review-text">
           {{ review.text }}
         </p>
+
+        {% if review.consumer == user %}
+        <div class="review-actions">
+          <button class="review-btn edit-btn">Изменить</button>
+          <button class="review-btn delete-btn"
+            data-review-id="{{ review.id }}"
+            data-url="{% url 'reviews:delete_review' %}">Удалить</button>
+        </div>
+        {% endif %}
       </div>
     {% endfor %}
 
@@ -128,6 +138,8 @@
 </main>
 
 <script src="{% static 'assets/js/reviews.js' %}"></script>
+<script src="{% static "assets/js/jquery/jquery-3.7.0.min.js" %}"></script>
+<script src="{% static 'assets/js/jquery-ajax.js' %}"></script>
 
 </body>
 </html>

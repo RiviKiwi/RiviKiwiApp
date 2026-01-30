@@ -22,3 +22,52 @@
   margin-top: 5px;
   gap:3px;
 }
+
+.review-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.review-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* Изменить */
+.edit-btn {
+  background: var(--border-color);
+  color: var(--dark);
+}
+
+.edit-btn:hover {
+  background: #e5e0da;
+}
+
+/* Удалить */
+.delete-btn {
+  background: #f6dede;
+  color: #8a1f1f;
+}
+
+.delete-btn:hover {
+  background: #efcaca;
+}
+
+.review-text-area {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+}
