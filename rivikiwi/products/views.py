@@ -49,7 +49,7 @@ def index(request, category_slug=None):
         
     if has_discount:
         products = products.filter(discount__gt=0)
-        
+
     paginator = Paginator(products, 3)
     page = paginator.page(page)
     
