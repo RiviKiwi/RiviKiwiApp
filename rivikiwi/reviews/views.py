@@ -1,6 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from reviews.forms import ReviewForm
 from reviews.models import Review
@@ -14,14 +13,6 @@ def all_reviews(request, seller_username):
     context = {"reviews": reviews, "seller_username": seller_username}
 
     return render(request, "reviews/reviews.html", context)
-
-
-def single_review(request, seller_username, review_id):
-    review = Review.objects.filter(id=review_id)
-
-    context = {"review": review}
-
-    return render(request, "reviews/singe_review.html", context)
 
 
 @login_required
@@ -47,28 +38,24 @@ def create_review(request, seller_username):
 
 
 @login_required
-def edit_review(request, review_id):
+def edit_review(request):
+    review_id = request.POST.get("review_id")
     review = get_object_or_404(Review, id=review_id)
+    form_data = {
+        "text" : request.POST.get("text"),
+        "rating" : request.POST.get("rating")
+    }
+    form = ReviewForm(data=form_data, instance=review)
 
-    if request.method == "POST":
-        form = ReviewForm(data=request.POST, instance=review)
+    if form.is_valid():
+        form.save()
 
-        if form.is_valid():
-            form.save()
-
-        return HttpResponseRedirect(reverse("reviews:all_reviews"))
-    else:
-        form = ReviewForm(instance=review)
-
-    context = {"form": form}
-    return render(request, "reviews/create_review.html", context)
+    return redirect("reviews:all_reviews", seller_username=review.seller)
 
 
 @login_required
 def delete_review(request):
-    print("allo")
     review_id = request.POST.get("review_id")
-    print(type(review_id))
     review = Review.objects.get(id=review_id)
     review.delete()
     

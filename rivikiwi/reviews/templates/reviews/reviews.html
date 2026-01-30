@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Отзывы — RiviKiwi</title>
   <link rel="icon" href="{% static 'assets/images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/reviews.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
 </head>
 <body>
 
@@ -19,12 +19,6 @@
     <a href="{% url "catalog:home" %}" class="logo">
       <span class="logo-text">Rivi<span class="green-text">Kiwi</span></span>
     </a>
-
-    <div class="search-bar">
-      <img src="{% static 'assets/images/icons/search-icon.svg' %}">
-      <input type="text" placeholder="Что вы ищете?">
-      <button class="btn-search">Найти</button>
-    </div>
 
     {% if not user.is_authenticated %}
       <a href="{% url 'users:login' %}" class="btn btn-primary">
@@ -58,8 +52,7 @@
 
 <!-- ===== MAIN ===== -->
 <main class="container reviews-page">
-<div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
-</div>
+<div id="jq-notification" class="custom-notification"></div>
   <!-- ===== TABS ===== -->
   <div class="reviews-tabs">
     <button class="tab active" data-tab="all">Все отзывы</button>
@@ -84,7 +77,7 @@
 
     <!-- Текст отзыва -->
     <textarea
-      class="review-textarea"
+      class="review-text-area"
       name="text"
       placeholder="Поделитесь впечатлениями о продавце...">
     </textarea>
@@ -123,6 +116,34 @@
         </p>
 
         {% if review.consumer == user %}
+        <!-- EDIT REVIEW FORM (скрыта по умолчанию) -->
+          <div class="edit-review-form">
+            <form action="{% url "reviews:edit_review" %}" method="post">
+              {% csrf_token %}
+              <!-- выбор рейтинга -->
+              <div class="rating-select edit-rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+              </div>
+
+              <input type="hidden" id="ratingEditValue" name="rating" value="{{ review.rating }}">
+              
+              <textarea class="review-text-area edit-textarea" name="text">
+                {{review.text}}
+              </textarea>
+
+              <input type="hidden" name="review_id" value="{{ review.id }}">
+
+              <div class="edit-review-actions">
+                <button type="submit" class="review-btn apply-btn">Применить</button>
+                <button class="review-btn cancel-btn">Отмена</button>
+              </div>
+            </form>
+          </div>
+
         <div class="review-actions">
           <button class="review-btn edit-btn">Изменить</button>
           <button class="review-btn delete-btn"
@@ -138,7 +159,8 @@
 </main>
 
 <script src="{% static 'assets/js/reviews.js' %}"></script>
-<script src="{% static "assets/js/jquery/jquery-3.7.0.min.js" %}"></script>
+<script src="{% static 'assets/js/main-page-scripts.js' %}"></script>
+<script src="{% static 'assets/js/jquery/jquery-3.7.0.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery-ajax.js' %}"></script>
 
 </body>
