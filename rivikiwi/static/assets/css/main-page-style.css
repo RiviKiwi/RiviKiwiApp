@@ -994,3 +994,22 @@ input::placeholder {
   background-color: var(--bg-color);
   color: var(--green); 
 }
+
+
+/* ===== CUSTOM NOTIFICATION ===== */
+
+.custom-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid var(--green);
+  color: var(--dark);
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 999;
+}
