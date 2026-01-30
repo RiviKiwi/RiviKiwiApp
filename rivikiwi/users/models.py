@@ -17,5 +17,7 @@ class User(AbstractUser):
         return f"{self.username}"
     
     def get_fullname(self):
-        return f"{self.first_name} {self.last_name} {self.middle_name}"
+        default_name = f"{self.first_name} {self.last_name}"
+        return default_name + f" {self.middle_name}" if self.middle_name else default_name
+        
     
