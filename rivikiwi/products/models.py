@@ -35,7 +35,7 @@ class City(models.Model):
 
 class Product(models.Model):
     name = models.CharField(
-        max_length=100, blank=True, null=True, unique=True, verbose_name="Название"
+        max_length=100, blank=True, null=True, verbose_name="Название"
     )
     slug = models.SlugField(unique=True, verbose_name="url")
     category = models.ForeignKey(

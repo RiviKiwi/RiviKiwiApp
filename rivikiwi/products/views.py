@@ -80,19 +80,24 @@ def add_product(request):
         if (len(images)<10):
             if form.is_valid():
                 new_form = form.save(commit=False)
-                category = ProductCategory.objects.get(slug=category_sl)
-                city = City.objects.get(slug=city_sl)
-                new_form.category = category
-                new_form.city = city
-                new_form.user = request.user
-                new_form.save()
-                for i,image in enumerate(images):
-                    is_main = True if i==0 else False
-                    ProductImage.objects.create(image=image, product=new_form, is_main=is_main)
-                return HttpResponseRedirect(reverse('catalog:home'))
+                try:
+                    category = ProductCategory.objects.get(slug=category_sl)
+                    city = City.objects.get(slug=city_sl)
+                    new_form.category = category
+                    new_form.city = city
+                    new_form.user = request.user
+                    new_form.save()
+                    for i,image in enumerate(images):
+                        is_main = True if i==0 else False
+                        ProductImage.objects.create(image=image, product=new_form, is_main=is_main)
+                    return HttpResponseRedirect(reverse('catalog:home'))
+                except Exception:
+                    print("wrong slug in category or city")
     else:
         form = AddProductForm()
+        
     context={
         'form':form,
     }
+
     return render(request, 'products/product_add_form.html', context)
