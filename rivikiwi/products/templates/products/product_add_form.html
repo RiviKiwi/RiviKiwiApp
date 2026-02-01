@@ -79,10 +79,15 @@
       </select>
     </label>
 
+    <div class="form-actions">
     <button type="submit" class="btn btn-primary btn-submit">
       Опубликовать объявление
     </button>
-    
+
+    <a href="{% url "catalog:home" %}" class="btn btn-cancel">
+      Назад
+    </a>
+    </div>
   </form>
   <script src="{% static 'assets/js/create-ad.js' %}"></script>
 {% endblock content %}

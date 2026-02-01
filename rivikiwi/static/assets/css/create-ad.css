@@ -80,6 +80,20 @@
   width: fit-content;
 }
 
+.btn-cancel {
+  background-color: #8b5a2b; /* коричневый */
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cancel:hover {
+  background-color: #73471f;
+}
+
+
 /* ===== USER SELECT ===== */
 .user-select {
   display: flex;
@@ -112,4 +126,23 @@
 .add-user-btn:hover {
   background: var(--green);
   color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+
+/* маленькая кнопка "Назад" */
+.btn-cancel {
+  padding: 8px 16px;
+  font-size: 14px;
+  width: auto;
+}
+
+/* чтобы кнопка публикации не растягивалась */
+.form-actions .btn {
+  width: auto;
 }
