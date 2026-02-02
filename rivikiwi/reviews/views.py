@@ -1,66 +1,85 @@
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from reviews.forms import ReviewForm
 from reviews.models import Review
 from reviews.utils import seller_reviews
 from users.models import User
 
 
-def all_reviews(request, seller_username):
-    reviews = seller_reviews(seller_username)
+class ReviewsView(ListView):
+    model = Review
+    template_name = "reviews/reviews.html"
+    context_object_name = "reviews"
 
-    context = {"reviews": reviews, "seller_username": seller_username}
+    def get_queryset(self):
+        seller_username = self.kwargs.get("seller_username")
+        reviews = seller_reviews(seller_username)
+        return reviews
 
-    return render(request, "reviews/reviews.html", context)
-
-
-@login_required
-def create_review(request, seller_username):
-    reviews = seller_reviews(seller_username)
-
-    if request.method == "POST":
-        seller = User.objects.get(username=seller_username)
-        form = ReviewForm(data=request.POST)
-
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.seller = seller
-            review.consumer = request.user
-            review.save()
-
-        return redirect("reviews:all_reviews", seller_username=seller_username)
-    else:
-        form = ReviewForm()
-
-    context = {"form": form, "seller_username": seller_username, "reviews": reviews}
-    return render(request, "reviews/reviews.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["seller_username"] = self.kwargs.get("seller_username")
+        return context
 
 
-@login_required
-def edit_review(request):
-    review_id = request.POST.get("review_id")
-    review = get_object_or_404(Review, id=review_id)
-    form_data = {
-        "text" : request.POST.get("text"),
-        "rating" : request.POST.get("rating")
-    }
-    form = ReviewForm(data=form_data, instance=review)
+class CreateReviewView(LoginRequiredMixin, CreateView):
+    template_name = "reviews/reviews.html"
+    form_class = ReviewForm
 
-    if form.is_valid():
-        form.save()
+    def get_seller_username(self):
+        return self.kwargs.get("seller_username")
 
-    return redirect("reviews:all_reviews", seller_username=review.seller)
+    def get_success_url(self):
+        seller_username = self.get_seller_username()
+        return reverse_lazy(
+            "reviews:all_reviews", kwargs={"seller_username": seller_username}
+        )
+
+    def form_valid(self, form):
+        seller = User.objects.get(username=self.get_seller_username())
+        review = form.save(commit=False)
+        review.seller = seller
+        review.consumer = self.request.user
+        review.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        seller_username = self.get_seller_username()
+        context["seller_username"] = seller_username
+        context["reviews"] = seller_reviews(seller_username)
+        return context
 
 
-@login_required
-def delete_review(request):
-    review_id = request.POST.get("review_id")
-    review = Review.objects.get(id=review_id)
-    review.delete()
-    
-    response_data = {
-        "message" : "Отзыв успешно удален"
-    }
-    
-    return JsonResponse(response_data)
+class EditReviewView(LoginRequiredMixin, UpdateView):
+    template_name = "reviews/reviews.html"
+    form_class = ReviewForm
+
+    def get_object(self, queryset=None):
+        review_id = self.request.POST.get("review_id")
+        return Review.objects.get(id=review_id)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["text"] = self.request.POST.get("text")
+        initial["rating"] = self.request.POST.get("rating")
+        return initial
+
+    def get_success_url(self):
+        review = self.get_object()
+        return reverse_lazy(
+            "reviews:all_reviews", kwargs={"seller_username": review.seller}
+        )
+
+
+class DeleteReviewView(LoginRequiredMixin, View):
+    def post(self, request):
+        review_id = request.POST.get("review_id")
+        review = Review.objects.get(id=review_id)
+        review.delete()
+
+        response_data = {"message": "Отзыв успешно удален"}
+
+        return JsonResponse(response_data)
