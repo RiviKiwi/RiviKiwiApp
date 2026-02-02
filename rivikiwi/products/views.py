@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.urls import reverse
 from .models import Product, ProductCategory, City, ProductImage, ProductView
-from .utils import q_search
+from .utils import q_search, get_client_ip
 from .forms import AddProductForm
 from django.contrib.auth.decorators import login_required
 
@@ -16,10 +16,6 @@ def index(request, category_slug=None):
     city = request.GET.get("city", None)
     query = request.GET.get("q", None)
     page = request.GET.get("page", 1)
-    print(query)
-    
-    # if not category_slug:
-    #     category_slug = "all"
         
     category = ProductCategory.objects.get(slug=category_slug) if category_slug else None
     products = None
@@ -59,13 +55,6 @@ def index(request, category_slug=None):
     }
     return render(request, 'products/index.html', context)
 
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
 
 def product(request, product_slug):
     
