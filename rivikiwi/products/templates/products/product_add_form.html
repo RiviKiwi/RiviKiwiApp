@@ -25,6 +25,9 @@
       Название
       <input type="text" id="name_id" name="name" placeholder="Введите название товара" value="{% if form.name.value %}{{form.name.value}}{% endif %}" required>
     </label>
+    {% if form.name.errors %}
+    <div>{{form.name.errors}}</div>
+    {% endif %}
 
     <label>
       Категория
@@ -38,11 +41,17 @@
         {% endfor %}
       </select>
     </label>
+    {% if form.category.errors %}
+    <div>{{form.category.errors}}</div>
+    {% endif %}
 
     <label>
       Описание
       <textarea rows="5"  id="name_id" name="description" placeholder="Опишите товар подробно" value="{{form.description.value}}">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
     </label>
+    {% if form.description.errors %}
+    <div>{{form.description.errors}}</div>
+    {% endif %}
 
     <!-- ===== IMAGES ===== -->
     <div class="image-upload">
@@ -55,12 +64,17 @@
 
       <div class="image-preview" id="imagePreview"></div>
     </div>
+    {% if form.images.errors %}
+    <div>{{form.images.errors}}</div>
+    {% endif %}
 
     <label>
       Цена
       <input type="number" id="price_id" name="price" placeholder="0.00" min="0" max="100000"step="0.01" value="{{form.price.value}}">
     </label>
-
+    {% if form.price.errors %}
+    <div>{{form.price.errors}}</div>
+    {% endif %}
     <label>
       Скидка
       <input type="number" id="discount_id" name="discount" placeholder="0" min="0" max="100" step="1" value="{{form.discount.value}}">
@@ -78,6 +92,10 @@
         {% endfor %}
       </select>
     </label>
+
+    {% if form.city.errors %}
+    <div>{{form.city.errors}}</div>
+    {% endif %}
 
     <div class="form-actions">
     <button type="submit" class="btn btn-primary btn-submit">
