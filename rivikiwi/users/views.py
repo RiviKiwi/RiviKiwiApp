@@ -1,56 +1,42 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.views.generic import CreateView
 from .forms import UserAuthenticationForm, UserRegistrationForm, ProfileForm
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 from users.models import User
 
 
-def login(request):
-    if request.method == "POST":
-        form = UserAuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-            user = auth.authenticate(username=username, password=password)
-            if user:
-                auth.login(request, user)
-                redirect_page = request.POST.get("next", None)
-                if redirect_page and redirect_page != reverse("users:logout"):
-                    return HttpResponseRedirect(redirect_page)
-
-                return HttpResponseRedirect(reverse("catalog:home"))
-    else:
-        form = UserAuthenticationForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "users/login.html", context)
+class UserLoginView(LoginView):
+    template_name="users/login.html"
+    form_class=UserAuthenticationForm
+    # success_url = reverse_lazy('catalog:home')
+    
+    def get_success_url(self):
+        redirect_page = self.request.POST.get("next", None)
+        if redirect_page and redirect_page != reverse("users:logout"):
+            return redirect_page
+        return reverse_lazy("catalog:home")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
-def registration(request):
+class UserRegistrationView(CreateView):
+    template_name="users/registration.html"
+    form_class=UserRegistrationForm
+    success_url=reverse_lazy("catalog:home")
     BACKEND = "django.contrib.auth.backends.ModelBackend"
-    if request.method == "POST":
-        form = UserRegistrationForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.instance
-            auth.login(request, user, backend=BACKEND)
-            return HttpResponseRedirect(reverse("catalog:home"))
-    else:
-        form = UserRegistrationForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "users/registration.html", context)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class UserProfileView(LoginRequiredMixin, UpdateView):
-    form_class = ProfileForm
     template_name = "users/self-profile.html"
+    form_class = ProfileForm
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -70,9 +56,3 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
             self.template_name = "users/user-profile.html"
             context["seller"] = User.objects.get(username=self.kwargs.get("username"))
         return context
-
-
-@login_required
-def logout(request):
-    auth.logout(request)
-    return redirect(reverse("catalog:home"))

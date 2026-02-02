@@ -4,8 +4,8 @@ from django.db.models import Value
 
 
 def q_search(query):
-    vector = SearchVector("name", "description")
-    query = SearchQuery(query)
+    vector = SearchVector("name", "description", config='russian')
+    query = SearchQuery(query, config='russian')
     result = (
         Product.objects.annotate(
             rank=SearchRank(
