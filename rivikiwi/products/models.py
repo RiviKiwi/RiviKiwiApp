@@ -87,7 +87,9 @@ class Product(models.Model):
 
         self.slug = unique_slug
         super().save(*args, **kwargs)
-
+        
+    def get_count_of_views(self):
+        return len(self.views.all()) if self.views.all() else 0
 
 class ProductImage(models.Model):
     product = models.ForeignKey(
@@ -103,3 +105,24 @@ class ProductImage(models.Model):
         db_table = "product_images"
         verbose_name = "изображение товара"
         verbose_name_plural = "Изображения товара"
+
+class ProductView(models.Model):
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        related_name='views',
+        verbose_name="Продукт"
+    )
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь"
+    )
+    ip_address = models.GenericIPAddressField(verbose_name="IP адрес")
+    date = models.DateTimeField(auto_now=True, verbose_name="Дата просмотра")
+    
+    class Meta:
+        unique_together = ['product', 'user', 'ip_address']
+        db_table="view"
+        verbose_name="просмотр"
+        verbose_name_plural="Просмотры"

@@ -28,7 +28,6 @@ def login(request):
     }
     return render(request, "users/login.html", context)
 
-
 def registration(request):
     BACKEND = "django.contrib.auth.backends.ModelBackend"
     if request.method == "POST":

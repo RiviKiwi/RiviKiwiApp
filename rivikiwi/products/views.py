@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.urls import reverse
-from .models import Product, ProductCategory, City, ProductImage
+from .models import Product, ProductCategory, City, ProductImage, ProductView
 from .utils import q_search
 from .forms import AddProductForm
 from django.contrib.auth.decorators import login_required
@@ -59,9 +59,32 @@ def index(request, category_slug=None):
     }
     return render(request, 'products/index.html', context)
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 def product(request, product_slug):
     
+    client_ip = get_client_ip(request)
+    user = request.user
+    
     product = Product.objects.get(slug=product_slug)
+    
+    if user.is_authenticated:
+        ProductView.objects.get_or_create(
+            product = product,
+            user=user,
+            ip_address=client_ip
+        )
+    else:
+        ProductView.objects.get_or_create(
+            product = product,
+            ip_address=client_ip
+        )
     
     context = {
         'product':product,    

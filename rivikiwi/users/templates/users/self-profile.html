@@ -19,10 +19,6 @@
           {% else %}
           <img src="{% static "assets/images/users/ava.png" %}" alt="Аватар" class="profile-avatar" id="avatarPreview" />
           {% endif %}
-
-          <label class="btn btn-outline avatar-btn" for="avatarInput">
-            Сменить аватар
-          </label>
         </div>
 
         <!-- ===== USER INFO (DISPLAY) ===== -->
@@ -58,6 +54,11 @@
         <div class="profile-edit-wrapper" id="profileEditWrapper">
         <form class="profile-edit-form" action="{% url "users:profile" user %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
+          <div class="avatar-upload">
+            <label class="btn btn-outline avatar-btn" for="avatarInput">
+              Сменить аватар
+            </label>
+          </div>
           <input type="file" id="avatarInput" accept="image/*" name="avatar" hidden />
           <label for="id_email" class="profile-field">
             Почта
