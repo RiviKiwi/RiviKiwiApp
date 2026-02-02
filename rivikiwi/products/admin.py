@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductCategory, Product, ProductImage, City
+from .models import ProductCategory, Product, ProductImage, ProductView, City
 
 
 @admin.register(ProductCategory)
@@ -24,3 +24,8 @@ class CityAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
     list_display=['id', 'name', 'slug']
     search_fields=['id', 'name', 'slug']
+    
+@admin.register(ProductView)
+class ProductViewAdmin(admin.ModelAdmin):
+    list_display=['id', 'user', 'product','ip_address']
+    search_fields=['id', 'user', 'product','ip_address']
