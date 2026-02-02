@@ -6,6 +6,7 @@ from .models import Product, ProductCategory, City, ProductImage, ProductView
 from .utils import q_search
 from .forms import AddProductForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic.detail import DetailView
 
 def index(request, category_slug=None):
     max_price = request.GET.get("max_price", None)
@@ -67,29 +68,59 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-def product(request, product_slug):
+class ProductViewController(DetailView):
     
-    client_ip = get_client_ip(request)
-    user = request.user
+    template_name='products/product.html'
+    slug_url_kwarg = "product_slug"
+    context_object_name="product"
     
-    product = Product.objects.get(slug=product_slug)
+    def check_is_view_exist(self, product):
+        client_ip = get_client_ip(self.request)
+        user = self.request.user
+        if user.is_authenticated:
+            ProductView.objects.get_or_create(
+                product = product,
+                user=user,
+                ip_address=client_ip
+            )
+        else:
+            ProductView.objects.get_or_create(
+                product = product,
+                ip_address=client_ip
+            )
     
-    if user.is_authenticated:
-        ProductView.objects.get_or_create(
-            product = product,
-            user=user,
-            ip_address=client_ip
-        )
-    else:
-        ProductView.objects.get_or_create(
-            product = product,
-            ip_address=client_ip
-        )
+    def get_object(self, queryset=None):
+        product = Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
+        self.check_is_view_exist(product)
+        return product
     
-    context = {
-        'product':product,    
-    }
-    return render(request, 'products/product.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+# def product(request, product_slug):
+    
+#     client_ip = get_client_ip(request)
+#     user = request.user
+    
+#     product = Product.objects.get(slug=product_slug)
+    
+#     if user.is_authenticated:
+#         ProductView.objects.get_or_create(
+#             product = product,
+#             user=user,
+#             ip_address=client_ip
+#         )
+#     else:
+#         ProductView.objects.get_or_create(
+#             product = product,
+#             ip_address=client_ip
+#         )
+    
+#     context = {
+#         'product':product,    
+#     }
+#     return render(request, 'products/product.html', context)
 
 @login_required
 def add_product(request):
