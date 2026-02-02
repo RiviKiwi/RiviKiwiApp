@@ -1,12 +1,9 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from .models import Product, ProductCategory, City, ProductImage, ProductView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .utils import q_search, get_client_ip
 from .forms import AddProductForm
-from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, ListView, CreateView
 
 
