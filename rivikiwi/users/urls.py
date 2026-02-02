@@ -8,7 +8,7 @@ app_name = 'users'
 urlpatterns = [
     path('login/', views.login, name="login"),
     path('registration/', views.registration, name="registration"),
-    path('profile/<str:username>', views.profile, name="profile"),
+    path('profile/<str:username>', views.UserProfileView.as_view(), name="profile"),
     path('logout/', views.logout, name="logout"),
     path('password-change/', PasswordChangeView.as_view(template_name="users/password_change.html",
                                                         success_url=reverse_lazy("users:password_change_done")), name='password_change'),
