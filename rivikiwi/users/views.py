@@ -30,6 +30,7 @@ def login(request):
     }
     return render(request, "users/login.html", context)
 
+
 def registration(request):
     BACKEND = "django.contrib.auth.backends.ModelBackend"
     if request.method == "POST":
@@ -46,38 +47,32 @@ def registration(request):
     }
     return render(request, "users/registration.html", context)
 
+
 class UserProfileView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
-    template_name = 'users/self-profile.html'
-    
-    def is_self_profile(self):
-        return self.request.user.username == self.kwargs.get('username')
-    
+    template_name = "users/self-profile.html"
+
     def get_object(self, queryset=None):
         return self.request.user
-    
-    def get(self, request, *args, **kwargs):
-        if not self.is_self_profile():
-            seller = User.objects.get(username=self.kwargs.get('username'))
-            self.template_name = 'users/user-profile.html'
-            context = {'seller': seller}
-            return self.render_to_response(context)
-            
-        return super().get(request, *args, **kwargs)
-    
-    def post(self, request, *args, **kwargs):
-        if not self.is_self_profile():
-            return redirect('users:profile', username=self.kwargs.get('username'))
-            
-        return super().post(request, *args, **kwargs)
-    
-    
+
+    def is_self_profile(self):
+        user = self.get_object()
+        return user.username == self.kwargs.get("username")
+
     def get_success_url(self):
-        return reverse_lazy('users:profile', kwargs={'username': self.kwargs.get('username')})
+        return reverse_lazy(
+            "users:profile", kwargs={"username": self.kwargs.get("username")}
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if not self.is_self_profile():
+            self.template_name = "users/user-profile.html"
+            context["seller"] = User.objects.get(username=self.kwargs.get("username"))
+        return context
+
 
 @login_required
 def logout(request):
     auth.logout(request)
     return redirect(reverse("catalog:home"))
-
-
