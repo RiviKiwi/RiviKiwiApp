@@ -178,7 +178,7 @@ input::placeholder {
 }
 .btn-primary {
   background: var(--green);
-  border: none;
+  border: 2px solid transparent;
   stroke:white;
   color: white;
 }
@@ -190,9 +190,16 @@ input::placeholder {
   font-size: 16px;
   padding: 15px 0;
   justify-content: center;
-  margin-top: 12px;
 }
-
+.edit-button {
+  width: 100%;
+  justify-content: center;
+}
+.product-buttons {
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+}
 /* ===== PRODUCT PAGE ===== */
 .product-page {
   padding: 40px 0;
@@ -276,10 +283,6 @@ input::placeholder {
   height: fit-content;
 }
 
-.product-right .btn-outline {
-  margin-top: 12px;
-}
-
 
 .product-title {
   margin-top: 0;
@@ -327,4 +330,63 @@ input::placeholder {
   margin-top: 10px;
   font-size: 14px;
   color: #777;
+}
+
+.link {
+  color:#90C825;
+}
+
+/*For Links in reviews*/
+.review-link {
+  color:#777;
+}
+
+.hidden {
+  display: none;
+}
+
+.product-edit-wrapper label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  transition: 10s ease-in-out;
+}
+
+.product-edit-wrapper input,
+.product-edit-wrapper textarea,
+.product-edit-wrapper select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  background: #c9b29b;
+  color: #fff;
+}
+
+.image-preview {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-preview img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none !important;
 }

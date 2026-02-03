@@ -19,3 +19,4 @@ class AddProductForm(forms.ModelForm):
                 "price",
                 "discount"
                 ]
+    

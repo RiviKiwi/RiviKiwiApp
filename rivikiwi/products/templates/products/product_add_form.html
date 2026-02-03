@@ -18,7 +18,7 @@
 
   <h1 class="page-title">Создание объявления</h1>
 
-  <form class="create-ad-form" action="{% url 'catalog:add_product' %}" method="post" enctype="multipart/form-data">
+  <form class="create-ad-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <label>
@@ -28,7 +28,6 @@
     {% if form.name.errors %}
     <div>{{form.name.errors}}</div>
     {% endif %}
-
     <label>
       Категория
       <select id="category_id" name="category">
@@ -36,7 +35,7 @@
         <option {% if not form.category.value %}selected{% endif %} value="default">Категория не выбрана </option>
         {% for category in categories %}
             {% if category.slug != "all" %}
-                <option {% if form.category.value == category.slug %}selected{% endif %} value="{{ category.slug }}">{{ category.name }}</option>
+                <option {% if form.category.value.name == category.name %}selected{% endif %} value="{{ category.slug }}">{{ category.name }}</option>
             {% endif %}
         {% endfor %}
       </select>
@@ -61,6 +60,7 @@
         <input type="file" id="images_id" name="images" multiple accept="image/*">
         <span>➕ Добавить фото</span>
       </label>
+      
 
       <div class="image-preview" id="imagePreview"></div>
     </div>
@@ -69,9 +69,19 @@
     {% endif %}
 
     <label>
-      Цена
-      <input type="number" id="price_id" name="price" placeholder="0.00" min="0" max="100000"step="0.01" value="{{form.price.value}}">
+    Цена
+    <input 
+        type="text" 
+        id="price_id" 
+        name="price" 
+        placeholder="0.00" 
+        min="0" 
+        max="100000000" 
+        step="1" 
+        value="{{form.price.value}}"
+    >
     </label>
+</script>
     {% if form.price.errors %}
     <div>{{form.price.errors}}</div>
     {% endif %}
@@ -79,7 +89,6 @@
       Скидка
       <input type="number" id="discount_id" name="discount" placeholder="0" min="0" max="100" step="1" value="{{form.discount.value}}">
     </label>
-
     <label>
       Город
       <select id="city_id" name="city">
@@ -87,7 +96,7 @@
         <option {% if not form.city.value %}selected{% endif %} value="default">Город не выбран</option>
         {% for city in cities %}
             {% if city.slug != "all_cities" %}
-                <option {% if form.city.value == city.slug %}selected{% endif %} value="{{ city.slug }}">{{ city.name }}</option>
+                <option {% if form.city.value.name == city.name %}selected{% endif %} value="{{ city.slug }}">{{ city.name }}</option>
             {% endif %}
         {% endfor %}
       </select>

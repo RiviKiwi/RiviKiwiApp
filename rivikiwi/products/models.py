@@ -116,13 +116,14 @@ class ProductView(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name="Пользователь"
+        verbose_name="Пользователь",
+        null=True,
+        blank=True
     )
     ip_address = models.GenericIPAddressField(verbose_name="IP адрес")
     date = models.DateTimeField(auto_now=True, verbose_name="Дата просмотра")
     
     class Meta:
-        unique_together = ['product','ip_address']
         db_table="view"
         verbose_name="просмотр"
         verbose_name_plural="Просмотры"

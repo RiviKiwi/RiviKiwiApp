@@ -4,7 +4,7 @@ from .models import Product, ProductCategory, City, ProductImage, ProductView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .utils import q_search, get_client_ip
 from .forms import AddProductForm
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 
 class IndexView(ListView):
@@ -90,15 +90,9 @@ class ProductViewController(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
-
-class AddProductView(LoginRequiredMixin, CreateView):
-    template_name = "products/product_add_form.html"
-    form_class = AddProductForm
     
-    def get_success_url(self):
-        return reverse_lazy("catalog:home")
     
+class ProductMixin:
     def form_valid(self, form):
         self.images = self.request.FILES.getlist("images")
         
@@ -108,7 +102,7 @@ class AddProductView(LoginRequiredMixin, CreateView):
         self.category_sl = self.request.POST.get("category")
         self.city_sl = self.request.POST.get("city")
         
-        new_form = form.save(commit=False)
+        new_form = form.save(commit=False)    
         
         try:
             category = ProductCategory.objects.get(slug=self.category_sl)
@@ -125,14 +119,67 @@ class AddProductView(LoginRequiredMixin, CreateView):
         new_form.city = city
         new_form.user = self.request.user
         new_form.save()
-        
         for i, image in enumerate(self.images):
             is_main = True if i == 0 else False
             ProductImage.objects.create(
                 image=image, product=new_form, is_main=is_main
             )
         return HttpResponseRedirect(self.get_success_url())
+
+
+class AddProductView(LoginRequiredMixin, ProductMixin, CreateView):
+    template_name = "products/product_add_form.html"
+    form_class = AddProductForm
+    
+    def get_success_url(self):
+        return reverse_lazy("catalog:home")
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+    
+    
+class EditProductView(LoginRequiredMixin, ProductMixin, UpdateView):
+    model=Product
+    template_name = "products/product_add_form.html"
+    form_class = AddProductForm
+    slug_field = 'slug'
+    slug_url_kwarg = 'product_slug'
+    
+    def get_object(self, queryset=None):
+        return Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
+    
+    def get_success_url(self):
+        return reverse_lazy("catalog:home")
+    
+    def delete_old_images(self):
+        old_images=ProductImage.objects.filter(product__slug=self.kwargs.get(self.slug_url_kwarg))
+        old_images.delete()
+        
+    def get_context_data(self, **kwargs):
+        self.delete_old_images()
+        context = super().get_context_data(**kwargs)
+        return context
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        product = self.get_object()
+        initial.update({
+            'name': product.name,
+            'category': product.category,
+            'description': product.description,
+            'price': product.price,
+            'discount': product.discount,
+            'city': product.city,
+        })
+        return initial
+
+
+class DeleteProductView(LoginRequiredMixin, DeleteView):
+    model=Product
+    success_url=reverse_lazy('catalog:home')
+    slug_field = 'slug'
+    slug_url_kwarg = 'product_slug'
+    
+    def get_object(self, queryset=None):
+        return Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
