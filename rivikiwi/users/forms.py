@@ -51,4 +51,4 @@ class ProfileForm(UserChangeForm):
     username = forms.CharField()
     phone=forms.CharField()
     email = forms.CharField()
-    profile_description = forms.CharField()
+    profile_description = forms.CharField(required=False)

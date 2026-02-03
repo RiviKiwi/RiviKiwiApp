@@ -2,7 +2,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from .forms import UserAuthenticationForm, UserRegistrationForm, ProfileForm
 from users.models import User
 
@@ -34,25 +34,18 @@ class UserRegistrationView(CreateView):
         return context
 
 
-class UserProfileView(LoginRequiredMixin, UpdateView):
+class SelfProfileView(LoginRequiredMixin, UpdateView):
     template_name = "users/self-profile.html"
     form_class = ProfileForm
+    success_url = reverse_lazy("users:self_profile")
 
     def get_object(self, queryset=None):
         return self.request.user
 
-    def is_self_profile(self):
-        user = self.get_object()
-        return user.username == self.kwargs.get("username")
 
-    def get_success_url(self):
-        return reverse_lazy(
-            "users:profile", kwargs={"username": self.kwargs.get("username")}
-        )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if not self.is_self_profile():
-            self.template_name = "users/user-profile.html"
-            context["seller"] = User.objects.get(username=self.kwargs.get("username"))
-        return context
+class SellerProfileView(DetailView):
+    template_name = "users/user-profile.html"
+    context_object_name = "seller"
+    
+    def get_object(self, queryset = None):
+        return User.objects.get(username=self.kwargs.get("username"))

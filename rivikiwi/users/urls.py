@@ -9,7 +9,8 @@ app_name = 'users'
 urlpatterns = [
     path('login/', views.UserLoginView.as_view(), name="login"),
     path('registration/', views.UserRegistrationView.as_view(), name="registration"),
-    path('profile/<str:username>', views.UserProfileView.as_view(), name="profile"),
+    path('profile/me', views.SelfProfileView.as_view(), name="self_profile"),
+    path('profile/<str:username>', views.SellerProfileView.as_view(), name="seller_profile"),
     path('logout/', LogoutView.as_view(next_page="catalog:home"), name="logout"),
     path('password-change/', PasswordChangeView.as_view(template_name="users/password_change.html",
                                                         success_url=reverse_lazy("users:password_change_done")), name='password_change'),
