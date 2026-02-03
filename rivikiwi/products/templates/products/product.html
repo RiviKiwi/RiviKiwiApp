@@ -25,7 +25,7 @@
         {% if product.get_first_picture %}
           <img id="main-image" src="{{product.get_first_picture.url}}" class="main-image" alt="{{product.name}}">
         {% else %}
-            <img src="{% static 'assets/images/log-background.svg' %}">
+            <img class="main-image" src="{% static 'assets/images/log-background.svg' %}">
         {% endif %}
         <div class="gallery">
           {% if product.get_other_pictures %}
