@@ -17,3 +17,5 @@ rivikiwi/reviews/migrations
 rivikiwi/media/
 rivikiwi/rivikiwi/.env
 rivikiwi/reviews/templatetags/__pycache__
+
+rivikiwi/common/__pycache__
