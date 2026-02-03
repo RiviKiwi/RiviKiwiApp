@@ -32,6 +32,7 @@ window.onclick = function(event) {
 //   });
   
 // });
+
 /* Сортировка товаров */
 function toggleSortMenu() {
     document.getElementById('sortDropdown').classList.toggle('show');
@@ -70,18 +71,6 @@ window.onclick = function(event) {
 }
 }
 
-function submitSortForm(value) {
-    document.getElementById('order_by_input').value = value;
-    document.getElementById('sort-form').submit();
-}
-
-function selectCityWithSubmit(cityName) {
-    selectCity(cityName);
-    document.getElementById('city_input').value = cityName;
-    document.getElementById('city-form').submit();
-}
-
-
 const fromInput = document.getElementById('price-from');
 const toInput = document.getElementById('price-to');
 
@@ -91,4 +80,28 @@ fromInput.addEventListener('input', function() {
     if (toInput.value && parseFloat(toInput.value) < parseFloat(this.value)) {
         toInput.value = this.value; 
     }
+});
+
+function markFavorite(button,event) {
+    button.classList.toggle('favorite-product');
+    event.preventDefault();
+    event.stopPropagation();
+    if (button.classList.contains('favorite-product')) {
+        console.log("Добавлено в избранное");
+    } else {
+        console.log("Удалено из избранного");
+    }
+}
+
+const viewElements = document.querySelectorAll('.product-views p');
+const formatter = new Intl.NumberFormat('en-US', {
+notation: "compact",
+maximumFractionDigits: 1
+});
+
+viewElements.forEach(el => {
+const originalValue = parseInt(el.textContent.replace(/\s/g, ''));
+if (!isNaN(originalValue)) {
+    el.textContent = formatter.format(originalValue).toLowerCase(); 
+}
 });

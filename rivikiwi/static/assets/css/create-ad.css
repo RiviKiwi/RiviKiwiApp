@@ -31,6 +31,11 @@
   font-size: 14px;
 }
 
+.create-ad-form textarea {
+  resize: vertical; 
+  min-height: fit-content;
+  max-width: 100%; 
+}
 /* ===== IMAGE UPLOAD ===== */
 .image-upload {
   display: flex;
