@@ -19,10 +19,15 @@
             <div class="product-price">
                 {{product.price}}$
             </div>
-            <div class="product-location">
-                <p style="font-size:7px;">Просмотров: {{product.get_count_of_views}}</p>
-                <img src="{% static 'assets/images/icons/location-pin-icon.svg' %}" height="15px" width="15px">
-                {{ product.city }}
+             <div class="product-bottom-info">
+                <div class="product-location">
+                    <img src="{% static 'assets/images/icons/location-pin-icon.svg' %}" height="15px" width="15px">
+                    {{product.city}}
+                </div>
+                <div class="product-views">
+                    <img src="{% static 'assets/images/icons/opened-eye.svg' %}" height="15px" width="15px">
+                    <p id="views-numb">{{product.get_count_of_views}}</p>
+                </div>
             </div>
         </div>
     </a>

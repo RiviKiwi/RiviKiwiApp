@@ -15,9 +15,9 @@
        <!-- ===== AVATAR ===== -->
         <div class="avatar-upload">
           {% if user.avatar %}
-          <img src="{{ user.avatar.url }}" alt="Аватар" class="profile-avatar" id="avatarPreview" />
+          <img src="{{ user.avatar.url }}" alt="Аватар" class="profile-avatar" id="avatarPreview">
           {% else %}
-          <img src="{% static "assets/images/users/ava.png" %}" alt="Аватар" class="profile-avatar" id="avatarPreview" />
+          <img src="{% static "assets/images/users/ava.png" %}" alt="Аватар" class="profile-avatar" id="avatarPreview">
           {% endif %}
         </div>
 
@@ -166,5 +166,7 @@
 <script src="{% static "assets/js/profile.js" %}"></script>
 {% endblock %}
 
+{% block footer %}
+{% endblock footer %}
 </body>
 </html>

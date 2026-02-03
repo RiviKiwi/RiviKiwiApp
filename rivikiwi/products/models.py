@@ -122,7 +122,7 @@ class ProductView(models.Model):
     date = models.DateTimeField(auto_now=True, verbose_name="Дата просмотра")
     
     class Meta:
-        unique_together = ['product', 'user', 'ip_address']
+        unique_together = ['product','ip_address']
         db_table="view"
         verbose_name="просмотр"
         verbose_name_plural="Просмотры"

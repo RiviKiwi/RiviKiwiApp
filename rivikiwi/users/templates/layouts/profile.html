@@ -35,9 +35,10 @@
 
       <!-- Кнопки -->
       <div class="header-actions">
-        <a href="{% url "users:logout" %}" class="btn btn-primary">
-          Выйти
-        </a>
+        <form action="{% url 'users:logout' %}" method="post" class="account-option">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Выйти</button>
+        </form>
       </div>
 
     </div>
