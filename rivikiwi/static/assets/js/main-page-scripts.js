@@ -34,15 +34,15 @@ window.onclick = function(event) {
 // });
 
 /* Сортировка товаров */
-function toggleSortMenu() {
-    document.getElementById('sortDropdown').classList.toggle('show');
-}
+// function toggleSortMenu() {
+//     document.getElementById('sortDropdown').classList.toggle('show');
+// }
 
-function selectSort(sortName) {
-    document.getElementById('currentSort').innerText = sortName;
-    document.getElementById('sortDropdown').classList.remove('show');
-    console.log("Выбрана сортировка:", sortName);
-}
+// function selectSort(sortName) {
+//     document.getElementById('currentSort').innerText = sortName;
+//     document.getElementById('sortDropdown').classList.remove('show');
+//     console.log("Выбрана сортировка:", sortName);
+// }
 /* Меню профиля в углу */
 function showAccountMenu() {
     const dropdown = document.getElementById('accountDropdown');
@@ -91,7 +91,8 @@ function markFavorite(button,event) {
     } else {
         console.log("Удалено из избранного");
     }
-}
+}Минск
+
 
 const viewElements = document.querySelectorAll('.product-views p');
 const formatter = new Intl.NumberFormat('en-US', {

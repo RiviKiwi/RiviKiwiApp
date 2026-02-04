@@ -3,6 +3,7 @@ from .models import Product, ProductCategory, ProductImage, ProductView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .utils import q_search, get_client_ip
 from .forms import AddProductForm
+from django.core.cache import cache
 from django.views.generic import (
     DetailView,
     ListView,
