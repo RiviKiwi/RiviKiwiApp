@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Избранное — RiviKiwi</title>
+
+    <link rel="icon" href="{% static 'assets/images/icons/rivikiwi-logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+
+    <script src="{% static 'assets/js/favorites.js' %}" defer></script>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <div class="container header-top">
+        <a href="index.html" class="logo">
+            <span class="logo-text">Rivi<span class="green-text">Kiwi</span></span>
+        </a>
+    </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <div class="catalog-header">
+        <h2>Избранные товары</h2>
+    </div>
+
+    <div class="products-grid">
+
+        <!-- ===== CARD ===== -->
+        <a href="#" class="product-card">
+            <div class="image-placeholder gradient-green">
+                <img src="{% static 'assets/images/log-background.svg' %}">
+            </div>
+
+            <div class="card-info">
+                <div class="card-header">
+                    <p class="text-line medium">
+                        Ноутбук Acer Aspire 5
+                    </p>
+
+                    <!-- ❤️ СЕРДЦЕ -->
+                    <button class="favorite-button favorite-product"
+                            onclick="toggleFavorite(this, event)">
+                        <svg width="24" height="21" viewBox="0 0 22 19">
+                            <path d="M11.6851 2.63897L11 3.3415L10.315 2.63898
+                                     C8.18404 0.453692 4.72912 0.45369
+                                     2.5982 2.63898
+                                     C0.5245 4.76559 0.460783 8.19279
+                                     2.45393 10.3989
+                                     L8.18026 16.7371
+                                     C9.70154 18.421 12.2984 18.421
+                                     13.8197 16.7371
+                                     L19.5461 10.3989
+                                     C21.5392 8.19277 21.4755 4.76557
+                                     19.4018 2.63896
+                                     C17.2709 0.453677 13.816 0.453679
+                                     11.6851 2.63897Z"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="product-price">1500$</div>
+
+                <div class="product-bottom-info">
+                    <div class="product-location">
+                        <i data-lucide="map-pin"></i>
+                        Минск
+                    </div>
+
+                    <div class="product-views">
+                        <img src="{% static 'assets/images/icons/opened-eye.svg'%}" width="15">
+                        <p>120</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+
+    </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="grid-4">
+
+            <div class="footer-brand">
+                <span class="logo-text-footer">RiviKiwi</span>
+                <p class="footer-copy">
+                    © 2026 RiviKiwi.<br>Все права защищены.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Компания</h4>
+                <ul class="footer-links">
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Новости</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Помощь</a></li>
+                    <li><a href="#">Правила</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Мы в соцсетях</h4>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
