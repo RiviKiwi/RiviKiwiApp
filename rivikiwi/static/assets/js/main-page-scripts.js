@@ -34,15 +34,15 @@ window.onclick = function(event) {
 // });
 
 /* Сортировка товаров */
-// function toggleSortMenu() {
-//     document.getElementById('sortDropdown').classList.toggle('show');
-// }
+function toggleSortMenu() {
+    document.getElementById('sortDropdown').classList.toggle('show');
+}
 
-// function selectSort(sortName) {
-//     document.getElementById('currentSort').innerText = sortName;
-//     document.getElementById('sortDropdown').classList.remove('show');
-//     console.log("Выбрана сортировка:", sortName);
-// }
+function selectSort(sortName) {
+    document.getElementById('currentSort').innerText = sortName;
+    document.getElementById('sortDropdown').classList.remove('show');
+    console.log("Выбрана сортировка:", sortName);
+}
 /* Меню профиля в углу */
 function showAccountMenu() {
     const dropdown = document.getElementById('accountDropdown');
@@ -91,8 +91,7 @@ function markFavorite(button,event) {
     } else {
         console.log("Удалено из избранного");
     }
-}Минск
-
+}
 
 const viewElements = document.querySelectorAll('.product-views p');
 const formatter = new Intl.NumberFormat('en-US', {
@@ -106,3 +105,37 @@ if (!isNaN(originalValue)) {
     el.textContent = formatter.format(originalValue).toLowerCase(); 
 }
 });
+
+function submitSortForm(sortValue) {
+    const input = document.getElementById('order_by_input');
+    input.value = sortValue;
+    document.getElementById('sort-form').submit();
+}
+
+function selectCityWithSubmit(cityName) {
+    document.querySelector('.current-city').innerText = cityName;
+    document.getElementById('cityDropdown').classList.remove('show');
+    
+    // Get all forms that need to be updated
+    const forms = ['city-form', 'sort-form'].map(id => document.getElementById(id)).filter(Boolean);
+    
+    forms.forEach(form => {
+        // Get or create the city input
+        let cityInput = form.querySelector('input[name="city"]');
+        if (!cityInput) {
+            cityInput = document.createElement('input');
+            cityInput.type = 'hidden';
+            cityInput.name = 'city';
+            form.appendChild(cityInput);
+        }
+        
+        // Update the city value
+        cityInput.value = cityName;
+    });
+
+    // Submit the main filter form
+    const cityForm = document.getElementById('city-form');
+    if (cityForm) {
+        cityForm.submit();
+    }
+}

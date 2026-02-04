@@ -19,3 +19,5 @@ rivikiwi/rivikiwi/.env
 rivikiwi/reviews/templatetags/__pycache__
 
 rivikiwi/common/__pycache__
+
+rivikiwi/cache/
