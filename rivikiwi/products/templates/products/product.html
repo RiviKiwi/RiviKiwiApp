@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{% static 'assets/images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
-  <title>Эндуро 250 — RiviKiwi</title>
+  <title>{{ product.name }}</title>
   <link rel="stylesheet" href="{% static 'assets/css/main-page-style.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/style-product.css' %}">
   <script src="{% static 'assets/js/main-page-scripts.js' %}" defer></script>
@@ -22,15 +22,19 @@
     <div class="product-left">
 
       <div class="product-images">
-        {% if product.get_first_picture %}
-          <img id="main-image" src="{{product.get_first_picture.url}}" class="main-image" alt="{{product.name}}">
+        {% if product.get_images %}
+          <img id="main-image" src="{{product.get_images.first.image.url}}" class="main-image" alt="{{product.name}}">
         {% else %}
             <img class="main-image" src="{% static 'assets/images/log-background.svg' %}">
         {% endif %}
         <div class="gallery">
-          {% if product.get_other_pictures %}
+          {% if product.get_images %}
             {% for image in product.get_images %}
+              {% if image.is_main %}
               <img src="{{image.image.url}}" class="thumbnail active" onclick="changeImage(this)">
+              {% else %}
+              <img src="{{image.image.url}}" class="thumbnail" onclick="changeImage(this)">
+              {% endif %}
             {% endfor %}
           {% endif %}
         </div>

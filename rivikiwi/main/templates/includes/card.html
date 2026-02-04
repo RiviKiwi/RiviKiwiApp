@@ -3,8 +3,8 @@
     {% for product in products%}
     <a href="{% url 'catalog:product' product.slug %}" class="product-card">
         <div class="image-placeholder gradient-green">
-            {% if product.get_first_picture %}
-                <img src="{{ product.get_first_picture.url }}">
+            {% if product.get_images %}
+                <img src="{{ product.get_images.first.image.url }}">
             {% else %}
                 <img src="{% static 'assets/images/log-background.svg' %}">
             {% endif %}

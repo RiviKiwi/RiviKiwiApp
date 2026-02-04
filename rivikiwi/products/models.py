@@ -64,14 +64,6 @@ class Product(models.Model):
 
         return self.price
 
-    def get_first_picture(self):
-        res_image = self.images.filter(is_main=True).first()
-        return res_image.image if res_image else None
-
-    def get_other_pictures(self):
-        res_images = self.images.filter(is_main=False)
-        return res_images if res_images else None
-
     def get_images(self):
         res_images = self.images.all()
         return res_images if res_images else None
