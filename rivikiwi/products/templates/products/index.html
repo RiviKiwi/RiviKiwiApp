@@ -1,14 +1,17 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load cache %}
 {% load products_tags %}
 
 {% block categories_nav %}
 <nav class="header-bottom">
             <div class="container categories-container">
-                {% all_categories as categories %}
-                {% for cat in categories %}
-                    <a href="{% url 'catalog:index' cat.slug %}" class="cat-link {% if cat.slug == category.slug%}active{% endif %}">{{ cat.name }}</a>
-                {% endfor %}
+                {% cache 500 categories %}
+                    {% all_categories as categories %}
+                    {% for cat in categories %}
+                        <a href="{% url 'catalog:index' cat.slug %}" class="cat-link {% if cat.slug == category.slug%}active{% endif %}">{{ cat.name }}</a>
+                    {% endfor %}
+                {% endcache %}
             </div>
         </nav>
 {% endblock  %}

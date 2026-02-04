@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, View
+from django.core.cache import cache
 from django.contrib.auth.mixins import LoginRequiredMixin
 from reviews.forms import ReviewForm
 from reviews.models import Review
@@ -15,7 +16,10 @@ class ReviewsView(ListView):
 
     def get_queryset(self):
         seller_username = self.kwargs.get("seller_username")
-        reviews = seller_reviews(seller_username)
+        reviews = cache.get("reviews")
+        if not reviews:
+            reviews = seller_reviews(seller_username)
+            cache.set("reviews", reviews, 10*60)
         return reviews
 
     def get_context_data(self, **kwargs):
@@ -43,6 +47,11 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
         review.seller = seller
         review.consumer = self.request.user
         review.save()
+        
+        cache_data = cache.get("reviews")
+        if cache_data:
+            cache.delete("reviews")
+            
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
@@ -59,6 +68,9 @@ class EditReviewView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         review_id = self.request.POST.get("review_id")
+        cache_data = cache.get("reviews")
+        if cache_data:
+            cache.delete("reviews")
         return Review.objects.get(id=review_id)
 
     def get_initial(self):
@@ -79,6 +91,10 @@ class DeleteReviewView(LoginRequiredMixin, View):
         review_id = request.POST.get("review_id")
         review = Review.objects.get(id=review_id)
         review.delete()
+        
+        cache_data = cache.get("reviews")
+        if cache_data:
+            cache.delete("reviews")
 
         response_data = {"message": "Отзыв успешно удален"}
 
