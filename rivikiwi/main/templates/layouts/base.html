@@ -121,11 +121,10 @@
                                     <a href="{% url 'admin:index' %}" class="account-option">Админ-панель</a>
                                 {% endif %}
                                 </div>
-                                    <form action="{% url 'users:logout' %}" method="post" class="account-option">
-                                        {% csrf_token %}
-                                        <button type="submit" class="account-option">Выйти</button>
-                                    </form>
-                            </div>
+                                <form action="{% url 'users:logout' %}" method="post" class="exit-option">
+                                    {% csrf_token %}
+                                    <button type="submit" class="account-option">Выйти</button>
+                                </form>
                         </div>
                     {% endif %}
                 </div>

@@ -51,8 +51,7 @@
     {% if form.description.errors %}
     <div>{{form.description.errors}}</div>
     {% endif %}
-
-    <!-- ===== IMAGES ===== -->
+    
     <div class="image-upload">
       <span class="upload-title">Фотографии</span>
 
@@ -60,8 +59,6 @@
         <input type="file" id="images_id" name="images" multiple accept="image/*">
         <span>➕ Добавить фото</span>
       </label>
-      
-
       <div class="image-preview" id="imagePreview"></div>
     </div>
     {% if form.images.errors %}

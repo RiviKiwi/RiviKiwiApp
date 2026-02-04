@@ -5,7 +5,8 @@ from products.models import City, ProductCategory, ProductImage
 class ProductMixin:
     def form_valid(self, form):
         self.images = self.request.FILES.getlist("images")
-
+        
+        print(len(self.images))
         if len(self.images) > 10:
             return self.form_invalid(form)
 
