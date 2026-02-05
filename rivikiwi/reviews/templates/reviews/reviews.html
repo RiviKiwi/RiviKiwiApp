@@ -38,6 +38,7 @@
               </span>
               <div class="acc-menu-options">
                   <a href="{% url "users:self_profile" %}" class="account-option">Профиль</a>
+                  <a href="{% url "wishlist:index" %}" class="account-option">Список желаемого</a>
               {% if user.is_staff or user.is_admin %}
                   <a href="{% url 'admin:index' %}" class="account-option">Админ-панель</a>
               {% endif %}
