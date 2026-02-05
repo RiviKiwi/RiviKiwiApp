@@ -306,7 +306,7 @@ input::placeholder {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  min-width: 150px;
+  min-width: 170px;
   z-index: 1000;   
   margin-top: 10px; 
   flex-direction: column;

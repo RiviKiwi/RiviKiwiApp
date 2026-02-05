@@ -158,8 +158,8 @@
         {% for product in user_products %}
           <a href="{% url "products:product" product.slug %}" class="product-card">
             <div class="product-image">
-              {% if product.get_first_picture %}
-                <img id="main-image" src="{{product.get_first_picture.url}}" class="main-image" alt="{{product.name}}">
+              {% if product.get_images %}
+                <img id="main-image" src="{{product.get_images.first.image.url}}" class="main-image" alt="{{product.name}}">
               {% else %}
                 <img src="{% static 'assets/images/log-background.svg' %}">
               {% endif %}
