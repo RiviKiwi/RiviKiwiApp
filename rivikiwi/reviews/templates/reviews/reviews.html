@@ -69,11 +69,11 @@
     {% csrf_token %}
   <!-- Выбор рейтинга -->
     <div class="rating-select">
-      <span class="star" data-value="1">★</span>
-      <span class="star" data-value="2">★</span>
-      <span class="star" data-value="3">★</span>
-      <span class="star" data-value="4">★</span>
-      <span class="star" data-value="5">★</span>
+      <span class="star add-star" data-value="1">★</span>
+      <span class="star add-star" data-value="2">★</span>
+      <span class="star add-star" data-value="3">★</span>
+      <span class="star add-star" data-value="4">★</span>
+      <span class="star add-star" data-value="5">★</span>
     </div>
 
     <!-- Текст отзыва -->
@@ -123,14 +123,14 @@
               {% csrf_token %}
               <!-- выбор рейтинга -->
               <div class="rating-select edit-rating">
-                <span class="star" data-value="1">★</span>
-                <span class="star" data-value="2">★</span>
-                <span class="star" data-value="3">★</span>
-                <span class="star" data-value="4">★</span>
-                <span class="star" data-value="5">★</span>
+                <span class="star edit-star" data-value="1">★</span>
+                <span class="star edit-star" data-value="2">★</span>
+                <span class="star edit-star" data-value="3">★</span>
+                <span class="star edit-star" data-value="4">★</span>
+                <span class="star edit-star" data-value="5">★</span>
               </div>
 
-              <input type="hidden" id="ratingEditValue" name="rating" value="{{ review.rating }}">
+              <input type="hidden" class="edit-rating-input" name="rating" value="{{ review.rating }}">
               
               <textarea class="review-text-area edit-textarea" name="text">
                 {{review.text}}
