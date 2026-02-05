@@ -21,3 +21,6 @@ rivikiwi/reviews/templatetags/__pycache__
 rivikiwi/common/__pycache__
 
 rivikiwi/cache/
+
+rivikiwi/wishlist/__pycache__
+rivikiwi/wishlist/migrations/
