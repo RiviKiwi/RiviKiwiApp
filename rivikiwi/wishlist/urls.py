@@ -5,5 +5,5 @@ from . import views
 app_name = 'wishlist'
 
 urlpatterns = [
-    path('', views.wishlist, name="wishlist"),
+    path('', views.WishlistView.as_view(), name="index"),
 ]

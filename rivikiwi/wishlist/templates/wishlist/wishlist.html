@@ -22,7 +22,7 @@
 <!-- ===== HEADER ===== -->
 <header class="site-header">
     <div class="container header-top">
-        <a href="index.html" class="logo">
+        <a href="{% url "catalog:home" %}" class="logo">
             <span class="logo-text">Rivi<span class="green-text">Kiwi</span></span>
         </a>
     </div>
@@ -38,15 +38,20 @@
     <div class="products-grid">
 
         <!-- ===== CARD ===== -->
-        <a href="#" class="product-card">
+        {% for item in wishlist %}
+        <a href="{% url "catalog:product" item.product.slug %}" class="product-card">
             <div class="image-placeholder gradient-green">
-                <img src="{% static 'assets/images/log-background.svg' %}">
+                {% if item.product.get_images %}
+                    <img src="{{ item.product.get_images.first.image.url }}">
+                {% else %}
+                    <img src="{% static 'assets/images/log-background.svg' %}">
+                {% endif %}
             </div>
 
             <div class="card-info">
                 <div class="card-header">
                     <p class="text-line medium">
-                        Ноутбук Acer Aspire 5
+                        {{item.product.name}}
                     </p>
 
                     <!-- ❤️ СЕРДЦЕ -->
@@ -73,21 +78,22 @@
                     </button>
                 </div>
 
-                <div class="product-price">1500$</div>
+                <div class="product-price">{{item.product.price}}</div>
 
                 <div class="product-bottom-info">
                     <div class="product-location">
                         <i data-lucide="map-pin"></i>
-                        Минск
+                        {{item.product.city}}
                     </div>
 
                     <div class="product-views">
                         <img src="{% static 'assets/images/icons/opened-eye.svg'%}" width="15">
-                        <p>120</p>
+                        <p>{{item.product.get_count_of_views}}</p>
                     </div>
                 </div>
             </div>
         </a>
+        {% endfor %}
         
 
     </div>
