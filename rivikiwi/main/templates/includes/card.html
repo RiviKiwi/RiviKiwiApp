@@ -1,52 +1,49 @@
 {% load static %}
 {% load products_tags %}
-<div class="products-grid">
-    {% for product in products%}
-    <a href="{% url 'catalog:product' product.slug %}" class="product-card">
-        <div class="image-placeholder gradient-green">
-            {% if product.get_images %}
-            <img src="{{ product.get_images.first.image.url }}">
-            {% else %}
-            <img src="{% static 'assets/images/log-background.svg' %}">
-            {% endif %}
+<a href="{% url 'catalog:product' product.slug %}" class="product-card">
+    <div class="image-placeholder gradient-green">
+        {% if product.get_images %}
+        <img src="{{ product.get_images.first.image.url }}">
+        {% else %}
+        <img src="{% static 'assets/images/log-background.svg' %}">
+        {% endif %}
+    </div>
+    <div class="card-info">
+        <div class="card-header">
+            <p class="text-line medium">{{product.description}}</p>
+            <form action='{% url "wishlist:add" product.id %}'
+                method="post">
+                {% csrf_token %}
+                
+                {% is_in_wishlist_tag product user as in_wishlist %}
+                <button type="submit"
+                    class="favorite-button{% if in_wishlist %} favorite-product{% endif %}"
+                    onclick="markFavorite(this, event)"><svg width="24"
+                        height="21" viewBox="0 0 22 19"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.6851 2.63897L11 3.3415L10.315 2.63898C8.18404 0.453692 4.72912 0.45369 2.5982 2.63898C0.5245 4.76559 0.460783 8.19279 2.45393 10.3989L8.18026 16.7371C9.70154 18.421 12.2984 18.421 13.8197 16.7371L19.5461 10.3989C21.5392 8.19277 21.4755 4.76557 19.4018 2.63896C17.2709 0.453677 13.816 0.453679 11.6851 2.63897Z"
+                            stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></button>
+            </form>
         </div>
-        <div class="card-info">
-            <div class="card-header">
-                <p class="text-line medium">{{product.description}}</p>
-                <form action='{% url "wishlist:add" product.id %}'
-                    method="post">
-                    {% csrf_token %}
-                    
-                    {% is_in_wishlist_tag product user as in_wishlist %}
-                    <button type="submit"
-                        class="favorite-button{% if in_wishlist %} favorite-product{% endif %}"
-                        onclick="markFavorite(this, event)"><svg width="24"
-                            height="21" viewBox="0 0 22 19"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.6851 2.63897L11 3.3415L10.315 2.63898C8.18404 0.453692 4.72912 0.45369 2.5982 2.63898C0.5245 4.76559 0.460783 8.19279 2.45393 10.3989L8.18026 16.7371C9.70154 18.421 12.2984 18.421 13.8197 16.7371L19.5461 10.3989C21.5392 8.19277 21.4755 4.76557 19.4018 2.63896C17.2709 0.453677 13.816 0.453679 11.6851 2.63897Z"
-                                stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></button>
-                </form>
+        <div class="product-price">
+            {{product.price}}$
+        </div>
+        <div class="product-bottom-info">
+            <div class="product-location">
+                <img
+                    src="{% static 'assets/images/icons/location-pin-icon.svg' %}"
+                    height="15px" width="15px">
+                {{product.city}}
             </div>
-            <div class="product-price">
-                {{product.price}}$
-            </div>
-            <div class="product-bottom-info">
-                <div class="product-location">
-                    <img
-                        src="{% static 'assets/images/icons/location-pin-icon.svg' %}"
-                        height="15px" width="15px">
-                    {{product.city}}
-                </div>
-                <div class="product-views">
-                    <img src="{% static 'assets/images/icons/opened-eye.svg' %}"
-                        height="15px" width="15px">
-                    <p id="views-numb">{{product.get_count_of_views}}</p>
-                </div>
+            <div class="product-views">
+                <img src="{% static 'assets/images/icons/opened-eye.svg' %}"
+                    height="15px" width="15px">
+                <p id="views-numb">{{product.get_count_of_views}}</p>
             </div>
         </div>
-    </a>
-    {% endfor %}
-</div>
+    </div>
+</a>
+

@@ -39,60 +39,9 @@
 
         <!-- ===== CARD ===== -->
         {% for item in wishlist %}
-        <a href="{% url "catalog:product" item.product.slug %}" class="product-card">
-            <div class="image-placeholder gradient-green">
-                {% if item.product.get_images %}
-                    <img src="{{ item.product.get_images.first.image.url }}">
-                {% else %}
-                    <img src="{% static 'assets/images/log-background.svg' %}">
-                {% endif %}
-            </div>
-
-            <div class="card-info">
-                <div class="card-header">
-                    <p class="text-line medium">
-                        {{item.product.name}}
-                    </p>
-
-                    <!-- ❤️ СЕРДЦЕ -->
-                    <button class="favorite-button favorite-product"
-                            onclick="toggleFavorite(this, event)">
-                        <svg width="24" height="21" viewBox="0 0 22 19">
-                            <path d="M11.6851 2.63897L11 3.3415L10.315 2.63898
-                                     C8.18404 0.453692 4.72912 0.45369
-                                     2.5982 2.63898
-                                     C0.5245 4.76559 0.460783 8.19279
-                                     2.45393 10.3989
-                                     L8.18026 16.7371
-                                     C9.70154 18.421 12.2984 18.421
-                                     13.8197 16.7371
-                                     L19.5461 10.3989
-                                     C21.5392 8.19277 21.4755 4.76557
-                                     19.4018 2.63896
-                                     C17.2709 0.453677 13.816 0.453679
-                                     11.6851 2.63897Z"
-                                  stroke-width="2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="product-price">{{item.product.price}}</div>
-
-                <div class="product-bottom-info">
-                    <div class="product-location">
-                        <i data-lucide="map-pin"></i>
-                        {{item.product.city}}
-                    </div>
-
-                    <div class="product-views">
-                        <img src="{% static 'assets/images/icons/opened-eye.svg'%}" width="15">
-                        <p>{{item.product.get_count_of_views}}</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+            {% with product=item.product %}
+                {% include 'includes/card.html' %}
+            {% endwith %}
         {% endfor %}
         
 

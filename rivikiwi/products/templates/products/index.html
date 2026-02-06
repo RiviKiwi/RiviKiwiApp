@@ -132,7 +132,11 @@
                             </form>
                         </div>
                 </div>
-                {% include 'includes/card.html'%}
+                <div class="products-grid">
+                    {% for product in products %}
+                        {% include 'includes/card.html'%}
+                    {% endfor %}
+                </div>
                 {% include 'includes/pagination.html' %}
             </div>
         </div>

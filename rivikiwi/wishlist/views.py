@@ -19,6 +19,7 @@ class WishlistView(LoginRequiredMixin, ListView):
 class WorkWithWishlistView(LoginRequiredMixin,View):
     
     def post(self, request, *args, **kwargs):
+        
         user = self.request.user
         product_id = self.kwargs.get('product_id')
         product = Product.objects.get(id=product_id)
