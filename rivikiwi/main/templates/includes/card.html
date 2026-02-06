@@ -11,11 +11,11 @@
     <div class="card-info">
         <div class="card-header">
             <p class="text-line medium">{{product.description}}</p>
-            <form action='{% url "wishlist:add" product.id %}'
+            {% is_in_wishlist_tag product user as in_wishlist %}
+            <form action={% if not in_wishlist %}'{% url "wishlist:add" product.id %}'{% else %}'{% url "wishlist:delete" product.id %}'{% endif %}
                 method="post">
                 {% csrf_token %}
                 
-                {% is_in_wishlist_tag product user as in_wishlist %}
                 <button type="submit"
                     class="favorite-button{% if in_wishlist %} favorite-product{% endif %}"
                     onclick="markFavorite(this, event)"><svg width="24"
