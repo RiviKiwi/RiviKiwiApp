@@ -11,6 +11,7 @@
   <link rel="icon" href="{% static 'assets/images/icons/rivikiwi-logo.svg' %}" type="image/x-icon">
   <!-- Основные стили сайта -->
   <link rel="stylesheet" href={% static "assets/css/main-page-style.css" %}>
+  <script src="{% static 'assets/js/main-page-scripts.js' %}" defer></script>
 </head>
 <body>
 {% endblock css %}
@@ -35,10 +36,26 @@
 
       <!-- Кнопки -->
       <div class="header-actions">
-        <form action="{% url 'users:logout' %}" method="post" class="account-option">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Выйти</button>
-        </form>
+        <div class="account-wrapper" onclick="showAccountMenu()">
+              <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 17C14 13.5636 11.0899 10.7778 7.5 10.7778C3.91015 10.7778 1 13.5636 1 17M7.5 8.11111C5.44866 8.11111 3.78571 6.51924 3.78571 4.55556C3.78571 2.59188 5.44866 1 7.5 1C9.55131 1 11.2143 2.59188 11.2143 4.55556C11.2143 6.51924 9.55131 8.11111 7.5 8.11111Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="account-dropdown" id="accountDropdown">
+                  <span class="account-name">
+                      <h3>{{ user.username }}</h3>
+                  </span>
+                  <div class="acc-menu-options">
+                      <a href="{% url "catalog:home" %}" class="account-option">Главная страница</a>
+                      <a href="{% url "wishlist:index" %}" class="account-option">Список желаемого</a>
+                  {% if user.is_staff or user.is_admin %}
+                      <a href="{% url 'admin:index' %}" class="account-option">Админ-панель</a>
+                  {% endif %}
+                  </div>
+                  <form action="{% url 'users:logout' %}" method="post" class="exit-option">
+                      {% csrf_token %}
+                      <button type="submit" class="account-option">Выйти</button>
+                  </form>
+            </div>
       </div>
 
     </div>
