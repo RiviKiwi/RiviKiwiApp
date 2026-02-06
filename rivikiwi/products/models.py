@@ -79,6 +79,7 @@ class Product(models.Model):
 
         self.slug = unique_slug
         super().save(*args, **kwargs)
+    
         
     def get_count_of_views(self):
         return len(self.views.all()) if self.views.all() else 0

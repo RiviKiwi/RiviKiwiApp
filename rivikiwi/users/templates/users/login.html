@@ -24,15 +24,19 @@
         {% if request.GET.next %}
           <input type="hidden" name="next" value={{ request.GET.next }}>
         {% endif %}
-        <input type="text" placeholder="Никнейм / Номер телефона / Электронная почта" name = "username" id = "id_username">
-
+        <input type="text" placeholder="Никнейм / Номер телефона" name = "username" id = "id_username" value="{{form.username.value|default:''}}">
+        {% if form.username.errors %}
+        <div>{{form.username.errors}}</div>
+        {% endif %}
         <div class="password-field">
           <input type="password" placeholder="Пароль" name = "password" id = "id_password">
           <span class="eye">
               <img src="{% static 'assets/images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
         </div>
-
+        {% if form.password.errors %}
+        <div>{{form.password.errors}}</div>
+        {% endif %}
         <button type="submit" class="login-btn">Войти</button>
       </form>
 

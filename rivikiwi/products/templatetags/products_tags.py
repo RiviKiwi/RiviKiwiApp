@@ -1,7 +1,7 @@
 from django import template
 from products.models import ProductCategory, City, Product
 from django.utils.http import urlencode
-
+from wishlist.utils import is_in_wishlist
 register = template.Library()
 
 @register.simple_tag()
@@ -25,3 +25,7 @@ def change_params(context, **kwargs):
     query = context['request'].GET.dict()
     query.update(kwargs)
     return urlencode(query)
+
+@register.simple_tag()
+def is_in_wishlist_tag(product, user):
+    return is_in_wishlist(product, user)

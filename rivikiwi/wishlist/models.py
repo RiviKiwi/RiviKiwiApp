@@ -8,7 +8,7 @@ class WishlistItem(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь"
     )
     product = models.ForeignKey(
-        to=Product, on_delete=models.CASCADE, verbose_name="Продукт"
+        to=Product, on_delete=models.CASCADE, verbose_name="Продукт" 
     )
     add_date = models.DateField(auto_now_add=True, verbose_name="Дата добавления")
 

@@ -1,7 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib import auth
 from django.views.generic import CreateView, DetailView
 from .forms import UserAuthenticationForm, UserRegistrationForm, ProfileForm
 from products.models import Product
@@ -18,6 +20,14 @@ class UserLoginView(LoginView):
         if redirect_page and redirect_page != reverse("users:logout"):
             return redirect_page
         return reverse_lazy("catalog:home")
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        return response
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

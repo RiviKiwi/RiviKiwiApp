@@ -1,11 +1,24 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 from .models import User
+import re
 
 class UserAuthenticationForm(AuthenticationForm):
+    username=forms.CharField()
+    password=forms.CharField()
     class Meta:
         model = User
         fields = ['username', 'password']
+        
+    # def clean_username(self):
+    #     data = self.cleaned_data['username']
+        
+    #     pattern = re.compile(r'^\w{5,30}$')
+        
+    #     if not pattern.match(data):
+    #         raise forms.ValidationError("Неверный формат username")
+
+    #     return data
     
 class UserRegistrationForm(UserCreationForm):
     username=forms.CharField()

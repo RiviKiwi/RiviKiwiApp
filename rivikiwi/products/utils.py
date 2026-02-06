@@ -1,4 +1,5 @@
 from .models import Product
+
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Value
 
@@ -26,3 +27,6 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+
