@@ -59,11 +59,11 @@
                                 method="get" 
                                 id="city-form">
                                 <input type="hidden" name="city" id="city_input">
-                                {% cache 500 cities %}
-                                {% all_cities as cities %}
+                                {% cache 500 'cities' request.path request.GET.city %}
+                                    {% all_cities as cities %}
                                     {% for city in cities %}
-                                        <div class="city-option{%if not request.GET.city and city.name == 'Любой город' %}2{% elif request.GET.city == city.name %}2{% endif %}" 
-                                            onclick="selectCityWithSubmit('{{ city }}')">
+                                        <div class="city-option{% if not request.GET.city and city.name == 'Любой город' or request.GET.city == city.name %}2{% endif %}" 
+                                            onclick="selectCityWithSubmit('{{ city.name }}')">
                                             {{ city.name }}
                                         </div>
                                     {% endfor %}
@@ -138,7 +138,7 @@
                 {% cache 500 categories %}
                     {% all_categories as categories %}
                     {% for category in categories %}
-                        <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if category.slug == 'all'%}active{% endif %}">{{ category.name }}</a>
+                        <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if category.slug == 'all' %}active{% endif %}">{{ category.name }}</a>
                     {% endfor %}
                 {% endcache %}
             </div>

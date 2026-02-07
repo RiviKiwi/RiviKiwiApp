@@ -5,9 +5,12 @@ charset-normalizer==3.4.4
 cryptography==46.0.3
 Django==6.0.1
 django-allauth==65.14.0
+django-debug-toolbar==6.2.0
 django-environ==0.12.0
 django-multiupload==0.6.1
 django-phonenumber-field==8.4.0
+django-ranged-response==0.2.0
+django-simple-captcha==0.6.3
 environ==1.0
 idna==3.11
 phonenumbers==9.0.22
