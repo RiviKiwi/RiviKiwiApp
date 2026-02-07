@@ -15,19 +15,40 @@
         <h2 class="title"><strong>Регистрация</strong></h2>
         <form action="{% url 'users:registration' %}" method="post">
           {% csrf_token %}
-          <input type="text" placeholder="Никнейм" name="username" id="id_username">
-          <input type="text" placeholder="Фамилия" name="last_name" id="id_last_name">
-          <input type="text" placeholder="Имя" name="first_name" id="id_first_name">
-          <input type="text" placeholder="Отчество" name="middle_name" id="id_middle_name">
-          <input type="text" placeholder="Номер телефона" name="phone" id="id_phone">
-          <input type="text" placeholder="Электронная почта (обязательно)" name="email" id="id_email">
-
+          <input type="text" placeholder="Никнейм" name="username" id="id_username" value="{{form.username.value|default:''}}" required>
+          {% if form.username.errors %}
+          <div>{{form.username.errors}}</div>
+          {% endif %}
+          <input type="text" placeholder="Фамилия" name="last_name" id="id_last_name" value="{{form.last_name.value|default:''}}" required>
+          {% if form.last_name.errors %}
+          <div>{{form.last_name.errors}}</div>
+          {% endif %}
+          <input type="text" placeholder="Имя" name="first_name" id="id_first_name" value="{{form.first_name.value|default:''}}" required>
+          {% if form.first_name.errors %}
+          <div>{{form.first_name.errors}}</div>
+          {% endif %}
+          <input type="text" placeholder="Отчество" name="middle_name" id="id_middle_name" value="{{form.middle_name.value|default:''}}" required>
+          {% if form.middle_name.errors %}
+          <div>{{form.middle_name.errors}}</div>
+          {% endif %}
+          <input type="text" placeholder="Номер телефона" name="phone" id="id_phone" value="{{form.phone.value|default:''}}" required>
+          {% if form.phone.errors %}
+          <div>{{form.phone.errors}}</div>
+          {% endif %}
+          <input type="text" placeholder="Электронная почта (обязательно)" name="email" id="id_email" value="{{form.email.value|default:''}}" required>
+          {% if form.email.errors %}
+          <div>{{form.email.errors}}</div>
+          {% endif %}
           <div class="password-field">
           <input type="password" placeholder="Пароль" name="password1" id="id_password1">
           <span class="eye">
               <img src="{% static 'assets/images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
+          
         </div>
+        {% if form.password1.errors %}
+          <div>{{form.password1.errors}}</div>
+        {% endif %}
 
         <div class="password-field">
           <input type="password" placeholder="Подтвердите пароль" name="password2" id="id_password12">
@@ -35,8 +56,13 @@
               <img src="{% static 'assets/images/icons/closed-eye.svg' %}" alt="Показать пароль">
           </span>
         </div>
-
+        {% if form.password1.errors %}
+          <div>{{form.password1.errors}}</div>
+        {% endif %}
         {{form.captcha}}
+        {% if form.captcha.errors %}
+          <div>{{form.captcha.errors}}</div>
+        {% endif %}
 
         <button type="submit" class="registration-btn">Зарегестрироваться</button>
       </form>

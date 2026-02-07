@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name="Отчество")
-    phone = PhoneNumberField(blank=True, region='BY', verbose_name="Номер телефона")
+    phone = PhoneNumberField(blank=True, null=True, unique=True, region='BY', verbose_name="Номер телефона")
     profile_description = models.TextField(blank=True, null=True, verbose_name="Описание профиля")
     avatar = models.ImageField(upload_to="users_images", blank=True, null=True, verbose_name="Аватар")
     email = models.EmailField(unique=True, verbose_name="Почта")
