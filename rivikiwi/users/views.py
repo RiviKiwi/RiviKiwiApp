@@ -1,5 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView
+from django.contrib import auth
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.views.generic import CreateView, DetailView
@@ -38,6 +40,14 @@ class UserRegistrationView(CreateView):
     form_class = UserRegistrationForm
     success_url = reverse_lazy("catalog:home")
     BACKEND = "django.contrib.auth.backends.ModelBackend"
+    
+    def form_valid(self, form):
+        user = form.instance
+        if user:
+            form.save()
+            auth.login(self.request, user, backend=self.BACKEND)
+            
+        return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

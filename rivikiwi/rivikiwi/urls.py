@@ -31,4 +31,7 @@ urlpatterns = [
     path("reviews/", include("reviews.urls",namespace="reviews")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns+= debug_toolbar_urls()
+urlpatterns += debug_toolbar_urls()
+urlpatterns += [
+    path('captcha/', include('captcha.urls')),
+]
