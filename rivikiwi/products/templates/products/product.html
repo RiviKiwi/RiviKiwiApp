@@ -53,18 +53,33 @@
       <div class="product-price">{{product.price}}₽</div>
 
       <div class="product-buttons">
-          <button class="btn btn-primary btn-large">Показать телефон</button>
-          {% if user.username ==  product.user.username %}
-            <a class="btn btn-outline btn-large" id="editToggle" href="{% url 'catalog:edit_product' product.slug %}">
-              Редактировать
-            </a>
-            <form action="{% url 'catalog:delete_product' product.slug %}" method="post">
-              {% csrf_token %}
-              <button class="btn btn-outline btn-large" id="editToggle">
-              Удалить</button>
-            </form>
+        <div class="phone-container">
+          {% if user.username != product.user.username %}
+          <button class="btn btn-primary btn-large" onclick="togglePhone()" id="showPhoneBtn">
+            Показать телефон
+          </button>
           {% endif %}
+          <div class="phone-number" id="phoneNumber">
+            <div>Телефон продавца:</div>
+            {% if product.user.phone %}
+               {{ product.user.phone }}
+            {% else %}
+              <span style="color: #666;">Телефон не указан</span>
+            {% endif %}
+          </div>
+        </div>
+        {% if user.username ==  product.user.username %}
+          <a class="btn btn-outline btn-large" id="editToggle" href="{% url 'catalog:edit_product' product.slug %}">
+            Редактировать
+          </a>
+          <form action="{% url 'catalog:delete_product' product.slug %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-outline btn-large" id="editToggle">
+            Удалить</button>
+          </form>
+        {% endif %}
       </div>
+      
       {% get_seller_reviews product.user as seller_reviews %}
       <div class="seller-card">
         <a class="seller-header">

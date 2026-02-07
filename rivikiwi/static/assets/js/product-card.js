@@ -49,3 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
     editBlock.classList.add('hidden');
   });
 });
+
+function togglePhone() {
+  const phoneElement = document.getElementById('phoneNumber');
+  const button = document.getElementById('showPhoneBtn');
+  
+  if (phoneElement.classList.contains('show')) {
+    phoneElement.classList.remove('show');
+    button.textContent = 'Показать телефон';
+  } else {
+    phoneElement.classList.add('show');
+    button.textContent = 'Скрыть телефон';
+    
+    // Закрытие при клике вне элемента
+    setTimeout(() => {
+      document.addEventListener('click', function closePhone(e) {
+        if (!phoneElement.contains(e.target) && e.target !== button) {
+          phoneElement.classList.remove('show');
+          button.textContent = 'Показать телефон';
+          document.removeEventListener('click', closePhone);
+        }
+      });
+    }, 0);
+  }
+}
