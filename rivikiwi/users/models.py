@@ -7,6 +7,7 @@ class User(AbstractUser):
     phone = PhoneNumberField(blank=True, region='BY', verbose_name="Номер телефона")
     profile_description = models.TextField(blank=True, null=True, verbose_name="Описание профиля")
     avatar = models.ImageField(upload_to="users_images", blank=True, null=True, verbose_name="Аватар")
+    email = models.EmailField(unique=True, verbose_name="Почта")
     
     class Meta:
         db_table = "user"
