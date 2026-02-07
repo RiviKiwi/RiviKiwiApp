@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     #django apps
     'phonenumber_field',
     "debug_toolbar",
+    'captcha',
     
     # our apps
     'products',
