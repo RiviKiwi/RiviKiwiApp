@@ -59,7 +59,7 @@
                                 method="get" 
                                 id="city-form">
                                 <input type="hidden" name="city" id="city_input">
-                                {% cache 500 'cities' request.path request.GET.city %}
+                    
                                     {% all_cities as cities %}
                                     {% for city in cities %}
                                         <div class="city-option{% if not request.GET.city and city.name == 'Любой город' or request.GET.city == city.name %}2{% endif %}" 
@@ -67,7 +67,7 @@
                                             {{ city.name }}
                                         </div>
                                     {% endfor %}
-                                {% endcache %}
+                        
                                 {% if request.GET.order_by %}
                                     <input type="hidden" name="order_by" value="{{ request.GET.order_by}}">
                                 {% endif %}
@@ -133,16 +133,6 @@
         </div>
         <!-- Нижний этаж (Навигация) -->
         {% block categories_nav %}
-        <nav class="header-bottom">
-            <div class="container categories-container">
-                {% cache 500 categories %}
-                    {% all_categories as categories %}
-                    {% for category in categories %}
-                        <a href="{% url 'catalog:index' category.slug %}" class="cat-link {% if category.slug == 'all' %}active{% endif %}">{{ category.name }}</a>
-                    {% endfor %}
-                {% endcache %}
-            </div>
-        </nav>
         {% endblock  %}
     </header>
 {% endblock header%}

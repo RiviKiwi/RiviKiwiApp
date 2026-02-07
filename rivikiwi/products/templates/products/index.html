@@ -5,16 +5,13 @@
 
 {% block categories_nav %}
 <nav class="header-bottom">
-            <div class="container categories-container">
-                {% cache 500 'categories' request.path %}
-                    {% all_categories as categories %}
-                    {% for cat in categories %}
-                        <a href="{% url 'catalog:index' cat.slug %}" class="cat-link {% if cat.slug == request.resolver_match.kwargs.category_slug %}active{% endif %}">{{ cat.name }}</a>
-                    {% endfor %}
-                {% endcache %}
-                
-            </div>
-        </nav>
+    <div class="container categories-container">
+        {% all_categories as categories %}
+        {% for cat in categories %}
+            <a href="{% url 'catalog:index' cat.slug %}" class="cat-link {% if cat.slug == category.slug %}active{% endif %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+</nav>
 {% endblock  %}
 
 {% block content %}

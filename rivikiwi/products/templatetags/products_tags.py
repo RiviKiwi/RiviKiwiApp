@@ -2,15 +2,24 @@ from django import template
 from products.models import ProductCategory, City, Product
 from django.utils.http import urlencode
 from wishlist.utils import is_in_wishlist
+from django.core.cache import cache
 register = template.Library()
 
 @register.simple_tag()
 def all_categories():
-    return ProductCategory.objects.all()
+    categories = cache.get('categories')
+    if not categories:
+        categories = ProductCategory.objects.all()
+        cache.set('categories', categories, 500)
+    return categories
 
 @register.simple_tag()
 def all_cities():
-    return City.objects.all()
+    cities = cache.get('cities')
+    if not cities:
+        cities = City.objects.all()
+        cache.set('cities', cities, 500)
+    return cities
 
 @register.simple_tag(takes_context=True)
 def all_user_products(context):
