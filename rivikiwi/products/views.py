@@ -85,8 +85,8 @@ class ProductViewController(DetailView):
                 product=product, user=user, ip_address=client_ip
             )
         else:
-            ProductView.objects.get_or_create(product=product, ip_address=client_ip)
-
+            ProductView.objects.get_or_create(product=product, ip_address=client_ip, user=None)
+            
     def get_object(self, queryset=None):
         product = Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))
         self.check_is_view_exist(product)
