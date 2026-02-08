@@ -11,15 +11,15 @@ class UserAuthenticationForm(AuthenticationForm):
         model = User
         fields = ['username', 'password']
         
-    # def clean_username(self):
-    #     data = self.cleaned_data['username']
+    def clean_username(self):
+        data = self.cleaned_data['username']
         
-    #     pattern = re.compile(r'^\w{5,30}$')
+        pattern = re.compile(r'^\w{5,30}$')
         
-    #     if not pattern.match(data):
-    #         raise forms.ValidationError("Неверный формат username")
+        if not pattern.match(data):
+            raise forms.ValidationError("Неверный формат username")
 
-    #     return data
+        return data
     
 class UserRegistrationForm(UserCreationForm):
     username=forms.CharField()

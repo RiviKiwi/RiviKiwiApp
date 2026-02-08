@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
+import logging
 from pathlib import Path
 from environ import Env
 from email import charset
@@ -228,3 +230,47 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
+LOG_DIR = BASE_DIR / 'logs'
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "detailed": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "standard": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            "filename": os.path.join(LOG_DIR, 'django.log'),
+            "formatter":"detailed",
+        },
+        'main_app': {
+            'level': 'DEBUG',
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            'filename': os.path.join(LOG_DIR, "main.log"),
+            'backupCount':1,
+            'formatter': 'detailed',
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "propagate": True,
+        },
+        "main_app": {
+            "handlers": ["main_app"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
