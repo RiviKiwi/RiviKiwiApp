@@ -259,6 +259,20 @@ LOGGING = {
             "when":"midnight",
             'filename': os.path.join(LOG_DIR, "main.log"),
             'backupCount':1,
+            'formatter': 'standard',
+        },
+        'users_app': {
+            'level': "DEBUG",
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            'filename': os.path.join(LOG_DIR, "users.log"),
+            'formatter': 'detailed',
+        },
+        'wishlist_app': {
+            'level': "DEBUG",
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            'filename': os.path.join(LOG_DIR, "wishlist.log"),
             'formatter': 'detailed',
         },
     },
@@ -269,6 +283,16 @@ LOGGING = {
         },
         "main_app": {
             "handlers": ["main_app"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "users_app": {
+            "handlers": ["users_app"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "wishlist_app": {
+            "handlers": ["wishlist_app"],
             "level": "DEBUG",
             "propagate": True,
         },

@@ -7,5 +7,5 @@ class AboutView(TemplateView):
     template_name = "main/about.html"
     
     def get_context_data(self, **kwargs):
-        logger.debug('render page about.html')
+        logger.warning("Context is created successfully for about")
         return super().get_context_data(**kwargs)
