@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView, View
 from django.core.cache import cache
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -46,6 +47,7 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
         review = form.save(commit=False)
         review.seller = seller
         review.consumer = self.request.user
+        review.write_date = timezone.now()
         review.save()
         
         cache_data = cache.get("reviews")
@@ -71,7 +73,10 @@ class EditReviewView(LoginRequiredMixin, UpdateView):
         cache_data = cache.get("reviews")
         if cache_data:
             cache.delete("reviews")
-        return Review.objects.get(id=review_id)
+        
+        review = Review.objects.get(id=review_id)
+        review.write_date = timezone.now()
+        return review
 
     def get_initial(self):
         initial = super().get_initial()

@@ -28,7 +28,7 @@ class Review(models.Model):
     rating = models.IntegerField(
         choices=[(x, x) for x in range(1, 6)], verbose_name="Оценка"
     )
-    write_date = models.DateField(auto_now_add=True, auto_created=True, verbose_name="Дата написания")
+    write_date = models.DateField(verbose_name="Дата написания")
     
     objects = ReviewQuerySet.as_manager()
 
