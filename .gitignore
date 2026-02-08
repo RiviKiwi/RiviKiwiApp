@@ -24,3 +24,5 @@ rivikiwi/cache/
 
 rivikiwi/wishlist/__pycache__
 rivikiwi/wishlist/migrations/
+
+rivikiwi/logs

@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
-import logging
 from pathlib import Path
 from environ import Env
 from email import charset
@@ -126,16 +125,6 @@ CACHES = {
 
 WSGI_APPLICATION = 'rivikiwi.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {  
     'default': {  
@@ -275,6 +264,20 @@ LOGGING = {
             'filename': os.path.join(LOG_DIR, "wishlist.log"),
             'formatter': 'detailed',
         },
+        'reviews_app': {
+            'level': "DEBUG",
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            'filename': os.path.join(LOG_DIR, "reviews.log"),
+            'formatter': 'detailed',
+        },
+        'products_app': {
+            'level': "DEBUG",
+            "class": 'logging.handlers.TimedRotatingFileHandler',
+            "when":"midnight",
+            'filename': os.path.join(LOG_DIR, "products.log"),
+            'formatter': 'detailed',
+        },
     },
     "loggers": {
         "django": {
@@ -293,6 +296,16 @@ LOGGING = {
         },
         "wishlist_app": {
             "handlers": ["wishlist_app"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "reviews_app": {
+            "handlers": ["reviews_app"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "products_app": {
+            "handlers": ["products_app"],
             "level": "DEBUG",
             "propagate": True,
         },
