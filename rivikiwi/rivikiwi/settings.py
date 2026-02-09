@@ -243,6 +243,8 @@ LOGGING = {
             "when":"midnight",
             "filename": os.path.join(LOG_DIR, 'django.log'),
             "formatter":"detailed",
+            "backupCount": 30,
+            
         },
         'main_app': {
             'level': 'DEBUG',
@@ -251,6 +253,8 @@ LOGGING = {
             'filename': os.path.join(LOG_DIR, "main.log"),
             'backupCount':1,
             'formatter': 'standard',
+            "backupCount": 30,
+            
         },
         'users_app': {
             'level': "DEBUG",
@@ -258,6 +262,8 @@ LOGGING = {
             "when":"midnight",
             'filename': os.path.join(LOG_DIR, "users.log"),
             'formatter': 'detailed',
+            "backupCount": 30,
+            
         },
         'wishlist_app': {
             'level': "DEBUG",
@@ -265,6 +271,8 @@ LOGGING = {
             "when":"midnight",
             'filename': os.path.join(LOG_DIR, "wishlist.log"),
             'formatter': 'detailed',
+            "backupCount": 30,
+            
         },
         'reviews_app': {
             'level': "DEBUG",
@@ -272,6 +280,8 @@ LOGGING = {
             "when":"midnight",
             'filename': os.path.join(LOG_DIR, "reviews.log"),
             'formatter': 'detailed',
+            "backupCount": 30,
+            
         },
         'products_app': {
             'level': "DEBUG",
@@ -279,6 +289,8 @@ LOGGING = {
             "when":"midnight",
             'filename': os.path.join(LOG_DIR, "products.log"),
             'formatter': 'detailed',
+            "backupCount": 30,
+            
         },
     },
     "loggers": {
