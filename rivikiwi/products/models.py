@@ -52,6 +52,7 @@ class Product(models.Model):
     creation_date = models.DateField(auto_now_add=True, verbose_name="Дата создания")
     
     class Meta:
+        ordering = ['id']
         db_table = "products"
         verbose_name = "продукт"
         verbose_name_plural = "Продукты"
