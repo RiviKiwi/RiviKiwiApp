@@ -1,6 +1,7 @@
+import random
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
+from transliterate import slugify
 
 
 class ProductCategory(models.Model):
@@ -69,8 +70,8 @@ class Product(models.Model):
         return res_images if res_images else None
     
     def save(self, *args, **kwargs):
-        new_slug = f"product-{self.category}-{self.name}"
-        unique_slug = slugify(new_slug)
+        product_name = slugify(self.name, language_code='ru')
+        unique_slug = f"product-{self.category.slug}-{product_name}"
         counter = 1
         original_slug = unique_slug
         while self.__class__.objects.filter(slug=unique_slug).exists():

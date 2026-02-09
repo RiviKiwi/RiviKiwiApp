@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
+from reviews.models import Review
 
 class User(AbstractUser):
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name="Отчество")
@@ -20,5 +21,10 @@ class User(AbstractUser):
     def get_fullname(self):
         default_name = f"{self.first_name} {self.last_name}"
         return default_name + f" {self.middle_name}" if self.middle_name else default_name
+    
+    def get_rating(self):
+        reviews = Review.objects.filter(seller=self)
+        return reviews.avg_rating()
+
         
     

@@ -12,6 +12,7 @@ from django.views.generic import (
     DeleteView,
 )
 from common.mixins import ProductMixin
+from users.models import User
 
 logger = logging.getLogger("products_app")
 
@@ -66,7 +67,8 @@ class IndexView(ListView):
             logger.debug("Filter products by max price")
 
         if rating:
-            products = products.filter(rating__gte=float(rating))
+            users = [user for user in User.objects.all() if user.get_rating() >= float(rating)]
+            products = products.filter(user__in=users)
             logger.debug("Filter products by rating")
 
         if has_discount:
@@ -141,7 +143,7 @@ class AddProductView(LoginRequiredMixin, ProductMixin, CreateView):
         logger.debug(f"AddProductView form valid for user {self.request.user.id}")
         response = super().form_valid(form)
         logger.info(
-            f"Product {self.object.id} created successfully by user {self.request.user.id}"
+            f"Product reated successfully by user {self.request.user.id}"
         )
         return response
 

@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+import logging
 from pathlib import Path
 from environ import Env
 from email import charset
+
 charset.add_charset('utf-8', charset.QP, charset.QP, 'utf-8')
 
 env = Env()
