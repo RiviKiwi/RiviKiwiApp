@@ -34,7 +34,7 @@
 
           <div class="profile-meta">
             <span>📧 {{ user.email }}</span>
-            <span>📞 {{ user.phone }}</span>
+            <span>📞 {{ user.phone|default:"Не указан" }}</span>
           </div>
 
           {% if user.profile_description %}
@@ -65,7 +65,7 @@
           {% endif %}
           <label for="id_email" class="profile-field">
             Почта
-            <input type="email" placeholder="example@mail.com" id="id_email" name="email" value="{{form.email.value}}"/>
+            <input type="email" placeholder="example@mail.com" id="id_email" name="email" value="{{form.email.value|default:""}}"/>
           </label>
           {% if form.email.errors %}
             <div>{{form.email.errors}}</div>
@@ -73,7 +73,7 @@
 
           <label for="id_phone" class="profile-field">
             Телефон
-            <input type="tel" placeholder="+375" id="id_phone" name="phone" value="{{form.phone.value}}"/>
+            <input type="tel" placeholder="+375" id="id_phone" name="phone" value="{{form.phone.value|default:""}}"/>
           </label>
           {% if form.phone.errors %}
             <div>{{form.phone.errors}}</div>
@@ -81,7 +81,7 @@
 
           <label for="id_username" class="profile-field">
             Username
-            <input type="text" placeholder="@username" id="id_username" name="username" value="{{form.username.value}}"/>
+            <input type="text" placeholder="@username" id="id_username" name="username" value="{{form.username.value|default:""}}"/>
           </label>
           {% if form.username.errors %}
             <div>{{form.username.errors}}</div>
@@ -89,7 +89,7 @@
 
           <label for="id_last_name" class="profile-field">
             Фамилия
-            <input type="text" placeholder="Иванов" id="id_last_name" name="last_name" value="{{form.last_name.value}}"/>
+            <input type="text" placeholder="Иванов" id="id_last_name" name="last_name" value="{{form.last_name.value|default:""}}"/>
           </label>
           {% if form.last_name.errors %}
             <div>{{form.last_name.errors}}</div>
@@ -97,7 +97,7 @@
 
           <label for="id_first_name" class="profile-field">
             Имя
-            <input type="text" placeholder="Иван" id="id_first_name" name="first_name" value="{{form.first_name.value}}"/>
+            <input type="text" placeholder="Иван" id="id_first_name" name="first_name" value="{{form.first_name.value|default:""}}"/>
           </label>
           {% if form.first_name.errors %}
             <div>{{form.first_name.errors}}</div>
@@ -105,7 +105,7 @@
 
           <label for="id_middle_name"class="profile-field">
             Отчество
-            <input type="text" placeholder="Иванович" id="id_middle_name" name="middle_name" value="{{form.middle_name.value}}"/>
+            <input type="text" placeholder="Иванович" id="id_middle_name" name="middle_name" value="{{form.middle_name.value|default:""}}"/>
           </label>
           {% if form.middle_name.errors %}
             <div>{{form.middle_name.errors}}</div>
@@ -113,7 +113,7 @@
 
           <label class="profile-field profile-field-textarea">
               Описание профиля
-              <textarea placeholder="Расскажите о себе..." rows="4" name="profile_description">{{form.profile_description.value}}</textarea>
+              <textarea placeholder="Расскажите о себе..." rows="4" name="profile_description">{{form.profile_description.value|default:""}}</textarea>
           </label>
           {% if form.profile_description.errors %}
             <div>{{form.profile_description.errors}}</div>
